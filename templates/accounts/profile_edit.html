@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Chỉnh sửa hồ sơ{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Thông tin cá nhân</h5>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ user_form.first_name.id_for_label }}" class="form-label">Tên</label>
+                                    {{ user_form.first_name }}
+                                    {% if user_form.first_name.errors %}
+                                        <div class="text-danger">{{ user_form.first_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ user_form.last_name.id_for_label }}" class="form-label">Họ</label>
+                                    {{ user_form.last_name }}
+                                    {% if user_form.last_name.errors %}
+                                        <div class="text-danger">{{ user_form.last_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ user_form.email.id_for_label }}" class="form-label">Email</label>
+                                    {{ user_form.email }}
+                                    {% if user_form.email.errors %}
+                                        <div class="text-danger">{{ user_form.email.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.phone_number.id_for_label }}" class="form-label">Số điện thoại</label>
+                                    {{ profile_form.phone_number }}
+                                    {% if profile_form.phone_number.errors %}
+                                        <div class="text-danger">{{ profile_form.phone_number.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.date_of_birth.id_for_label }}" class="form-label">Ngày sinh</label>
+                                    {{ profile_form.date_of_birth }}
+                                    {% if profile_form.date_of_birth.errors %}
+                                        <div class="text-danger">{{ profile_form.date_of_birth.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.city.id_for_label }}" class="form-label">Thành phố</label>
+                                    {{ profile_form.city }}
+                                    {% if profile_form.city.errors %}
+                                        <div class="text-danger">{{ profile_form.city.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.country.id_for_label }}" class="form-label">Quốc gia</label>
+                                    {{ profile_form.country }}
+                                    {% if profile_form.country.errors %}
+                                        <div class="text-danger">{{ profile_form.country.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Thông tin học tập HSK</h5>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.chinese_level.id_for_label }}" class="form-label">Trình độ tiếng Trung</label>
+                                    {{ profile_form.chinese_level }}
+                                    {% if profile_form.chinese_level.errors %}
+                                        <div class="text-danger">{{ profile_form.chinese_level.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.target_hsk_level.id_for_label }}" class="form-label">Mục tiêu HSK</label>
+                                    {{ profile_form.target_hsk_level }}
+                                    {% if profile_form.target_hsk_level.errors %}
+                                        <div class="text-danger">{{ profile_form.target_hsk_level.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.study_hours_per_week.id_for_label }}" class="form-label">Số giờ học/tuần</label>
+                                    {{ profile_form.study_hours_per_week }}
+                                    {% if profile_form.study_hours_per_week.errors %}
+                                        <div class="text-danger">{{ profile_form.study_hours_per_week.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.preferred_study_time.id_for_label }}" class="form-label">Thời gian học ưa thích</label>
+                                    {{ profile_form.preferred_study_time }}
+                                    {% if profile_form.preferred_study_time.errors %}
+                                        <div class="text-danger">{{ profile_form.preferred_study_time.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.avatar.id_for_label }}" class="form-label">Ảnh đại diện</label>
+                                    {{ profile_form.avatar }}
+                                    {% if profile_form.avatar.errors %}
+                                        <div class="text-danger">{{ profile_form.avatar.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="{{ profile_form.bio.id_for_label }}" class="form-label">Giới thiệu bản thân</label>
+                                    {{ profile_form.bio }}
+                                    {% if profile_form.bio.errors %}
+                                        <div class="text-danger">{{ profile_form.bio.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu thay đổi
+                            </button>
+                            <a href="{% url 'accounts:dashboard' %}" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

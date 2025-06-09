@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Bảng điều khiển - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Chào mừng, {{ user.get_full_name|default:user.username }}!</h2>
+        <p class="text-muted">Bảng điều khiển của bạn</p>
+        
+        <div class="row">
+            <!-- Profile Summary -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-user"></i> Thông tin cá nhân</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="Avatar" class="avatar-lg mb-3">
+                        {% else %}
+                            <div class="avatar-lg bg-secondary rounded-circle d-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-user text-white fa-2x"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <p><strong>Cấp độ HSK mục tiêu:</strong> HSK {{ profile.target_hsk_level }}</p>
+                        <p><strong>Trình độ hiện tại:</strong> {{ profile.get_chinese_level_display }}</p>
+                        <p><strong>Giờ học/tuần:</strong> {{ profile.study_hours_per_week }} giờ</p>
+                        
+                        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-edit"></i> Chỉnh sửa
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-number">0</div>
+                                <p class="text-muted">Bài thi đã làm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-number">0</div>
+                                <p class="text-muted">Điểm trung bình</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-number">{{ profile.target_hsk_level }}</div>
+                                <p class="text-muted">HSK mục tiêu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5><i class="fas fa-bolt"></i> Hành động nhanh</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-primary w-100 mb-2">
+                                    <i class="fas fa-file-alt"></i> Xem bài thi
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-info w-100 mb-2">
+                                    <i class="fas fa-chart-line"></i> Xem thống kê
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-history"></i> Hoạt động gần đây</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Chưa có hoạt động nào. Hãy bắt đầu làm bài thi đầu tiên!</p>
+                        
+                        <a href="#" class="btn btn-success">
+                            <i class="fas fa-play"></i> Bắt đầu thi ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

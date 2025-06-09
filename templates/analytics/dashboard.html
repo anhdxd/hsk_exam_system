@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Thống kê - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i class="fas fa-chart-bar"></i> Thống kê học tập</h2>
+        <p class="text-muted">Theo dõi tiến độ học tập của bạn</p>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="stat-number">0</div>
+                        <p class="text-muted">Bài thi đã hoàn thành</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="stat-number">0</div>
+                        <p class="text-muted">Điểm trung bình</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="stat-number">0</div>
+                        <p class="text-muted">Thời gian học (giờ)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="stat-number">{{ user.profile.target_hsk_level }}</div>
+                        <p class="text-muted">HSK mục tiêu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-line"></i> Biểu đồ tiến độ</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Biểu đồ sẽ hiển thị khi bạn có dữ liệu bài thi.</p>
+                        
+                        <a href="{% url 'exams:list' %}" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Bắt đầu làm bài thi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

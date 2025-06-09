@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Hồ sơ cá nhân - {{ user.get_full_name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="Avatar" class="rounded-circle mb-3" width="120" height="120">
+                    {% else %}
+                        <div class="bg-secondary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                            <i class="fas fa-user fa-3x text-white"></i>
+                        </div>
+                    {% endif %}
+                    <h4>{{ user.get_full_name }}</h4>
+                    <p class="text-muted">{{ user.email }}</p>
+                    <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Chỉnh sửa hồ sơ
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-user"></i> Thông tin cá nhân</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Số điện thoại:</strong> {{ profile.phone_number|default:"Chưa cập nhật" }}</p>
+                            <p><strong>Ngày sinh:</strong> {{ profile.date_of_birth|default:"Chưa cập nhật" }}</p>
+                            <p><strong>Thành phố:</strong> {{ profile.city|default:"Chưa cập nhật" }}</p>
+                            <p><strong>Quốc gia:</strong> {{ profile.country|default:"Chưa cập nhật" }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Trình độ tiếng Trung:</strong> {{ profile.get_chinese_level_display }}</p>
+                            <p><strong>Mục tiêu HSK:</strong> {{ profile.target_hsk_level }}</p>
+                            <p><strong>Số giờ học/tuần:</strong> {{ profile.study_hours_per_week }} giờ</p>
+                            <p><strong>Thời gian học ưa thích:</strong> {{ profile.get_preferred_study_time_display }}</p>
+                        </div>
+                    </div>
+                    {% if profile.bio %}
+                        <hr>
+                        <h6>Giới thiệu:</h6>
+                        <p>{{ profile.bio }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-bar"></i> Thống kê kết quả thi</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Tổng số bài thi:</strong> {{ total_exams }}</p>
+                            <p><strong>Bài thi đã hoàn thành:</strong> {{ completed_exams }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {% if hsk_performance %}
+                                <h6>Kết quả theo cấp độ HSK:</h6>
+                                {% for level, data in hsk_performance.items %}
+                                    <p><strong>{{ level }}:</strong> {{ data.attempts }} lần thi, điểm TB: {{ data.average_score }}%</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>Chưa có dữ liệu thi thử</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

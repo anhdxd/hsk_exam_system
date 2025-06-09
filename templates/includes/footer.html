@@ -1,0 +1,34 @@
+<footer class="bg-dark text-light mt-5 py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>HSK Exam System</h5>
+                <p>Hệ thống thi HSK trực tuyến giúp bạn đánh giá và nâng cao trình độ tiếng Trung.</p>
+            </div>
+            <div class="col-md-3">
+                <h6>Liên kết</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-light">Trang chủ</a></li>
+                    {% if user.is_authenticated %}
+                        {% comment %} <li><a href="{% url 'exams:list' %}" class="text-light">Bài thi</a></li> {% endcomment %}
+                        {% comment %} <li><a href="{% url 'analytics:dashboard' %}" class="text-light">Thống kê</a></li> {% endcomment %}
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Hỗ trợ</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light">Hướng dẫn</a></li>
+                    <li><a href="#" class="text-light">Liên hệ</a></li>
+                    <li><a href="#" class="text-light">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>&copy; 2025 HSK Exam System. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
