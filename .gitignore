@@ -1,12 +1,12 @@
 # Django
-*.log
+# *.log
 *.pot
 *.pyc
 __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
+# media/
 
 # Virtual Environment
 hskexamsystem-env/
@@ -53,9 +53,9 @@ wheels/
 
 # Environment variables
 .env
-.env.local
+# .env.local
 .env.development
-.env.test
+# .env.test
 .env.production
 
 # Static files
@@ -63,7 +63,7 @@ staticfiles/
 static_collected/
 
 # Logs
-logs/*.log
+# logs/*.log
 
 # Backup
 data/backups/*.sqlite3
