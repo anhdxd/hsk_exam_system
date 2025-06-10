@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if view.object %}Sửa câu hỏi{% else %}Tạo câu hỏi mới{% endif %} - HSK Exam System
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Header -->            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="fas fa-question-circle"></i>
+                    {% if view.object %}Sửa câu hỏi{% else %}Tạo câu hỏi mới{% endif %}
+                </h2>
+                <a href="{% url 'questions:list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+
+            {% if form.errors or formset.errors %}
+                <div class="alert alert-danger">
+                    <h5><i class="fas fa-exclamation-triangle"></i> Có lỗi xảy ra:</h5>
+                    {% if form.non_field_errors %}
+                        {{ form.non_field_errors }}
+                    {% endif %}
+                    {% if formset.non_form_errors %}
+                        {{ formset.non_form_errors }}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" id="questionForm">
+                {% csrf_token %}
+                
+                <!-- Question Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-edit"></i> Thông tin câu hỏi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="{{ form.question_text.id_for_label }}" class="form-label">
+                                    {{ form.question_text.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.question_text }}
+                                {% if form.question_text.errors %}
+                                    <div class="text-danger">{{ form.question_text.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.question_type.id_for_label }}" class="form-label">
+                                    {{ form.question_type.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.question_type }}
+                                {% if form.question_type.errors %}
+                                    <div class="text-danger">{{ form.question_type.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.hsk_level.id_for_label }}" class="form-label">
+                                    {{ form.hsk_level.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.hsk_level }}
+                                {% if form.hsk_level.errors %}
+                                    <div class="text-danger">{{ form.hsk_level.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="{{ form.difficulty.id_for_label }}" class="form-label">
+                                    {{ form.difficulty.label }}
+                                </label>
+                                {{ form.difficulty }}
+                                {% if form.difficulty.errors %}
+                                    <div class="text-danger">{{ form.difficulty.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.points.id_for_label }}" class="form-label">
+                                    {{ form.points.label }}
+                                </label>
+                                {{ form.points }}
+                                {% if form.points.errors %}
+                                    <div class="text-danger">{{ form.points.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check mt-4">
+                                    {{ form.is_active }}
+                                    <label for="{{ form.is_active.id_for_label }}" class="form-check-label">
+                                        {{ form.is_active.label }}
+                                    </label>
+                                </div>
+                                {% if form.is_active.errors %}
+                                    <div class="text-danger">{{ form.is_active.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Content -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-plus-circle"></i> Nội dung bổ sung</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="{{ form.passage.id_for_label }}" class="form-label">
+                                {{ form.passage.label }}
+                            </label>
+                            {{ form.passage }}
+                            <div class="form-text">{{ form.passage.help_text }}</div>
+                            {% if form.passage.errors %}
+                                <div class="text-danger">{{ form.passage.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">                            <label for="{{ form.audio_file.id_for_label }}" class="form-label">
+                                {{ form.audio_file.label }}
+                            </label>
+                            {{ form.audio_file }}
+                            <div class="form-text">{{ form.audio_file.help_text }}</div>
+                            {% if form.audio_file.errors %}
+                                <div class="text-danger">{{ form.audio_file.errors }}</div>
+                            {% endif %}
+                            {% if view.object and view.object.audio_file %}
+                                <div class="mt-2">
+                                    <small class="text-muted">File hiện tại: {{ view.object.audio_file.name }}</small>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.explanation.id_for_label }}" class="form-label">
+                                {{ form.explanation.label }}
+                            </label>
+                            {{ form.explanation }}
+                            {% if form.explanation.errors %}
+                                <div class="text-danger">{{ form.explanation.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Choices -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i> Lựa chọn</h5>
+                        <small class="text-muted">Tối thiểu 2 lựa chọn, tối đa 6 lựa chọn. Phải có ít nhất 1 đáp án đúng.</small>
+                    </div>
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        <div id="choice-formset">
+                            {% for form in formset %}
+                                <div class="choice-form mb-3 p-3 border rounded {% if form.instance.pk %}existing-choice{% else %}new-choice{% endif %}">
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                                    {% endif %}
+                                    
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1">
+                                            <div class="form-check">
+                                                {{ form.is_correct }}
+                                                <label for="{{ form.is_correct.id_for_label }}" class="form-check-label">
+                                                    Đúng
+                                                </label>
+                                            </div>
+                                            {% if form.is_correct.errors %}
+                                                <div class="text-danger small">{{ form.is_correct.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="col-md-1">
+                                            <label for="{{ form.order.id_for_label }}" class="form-label small">Thứ tự</label>
+                                            {{ form.order }}
+                                            {% if form.order.errors %}
+                                                <div class="text-danger small">{{ form.order.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="col-md-8">
+                                            <label for="{{ form.choice_text.id_for_label }}" class="form-label">Nội dung lựa chọn</label>
+                                            {{ form.choice_text }}
+                                            {% if form.choice_text.errors %}
+                                                <div class="text-danger">{{ form.choice_text.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="col-md-2">
+                                            {% if form.instance.pk %}
+                                                <div class="form-check">
+                                                    {{ form.DELETE }}
+                                                    <label for="{{ form.DELETE.id_for_label }}" class="form-check-label text-danger">
+                                                        Xóa
+                                                    </label>
+                                                </div>
+                                            {% else %}
+                                                <button type="button" class="btn btn-sm btn-danger remove-choice">
+                                                    <i class="fas fa-times"></i> Xóa
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <button type="button" id="add-choice" class="btn btn-outline-primary">
+                            <i class="fas fa-plus"></i> Thêm lựa chọn
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="text-center">                    <button type="submit" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-save"></i>
+                        {% if view.object %}Cập nhật câu hỏi{% else %}Tạo câu hỏi{% endif %}
+                    </button>
+                    <a href="{% url 'questions:list' %}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times"></i> Hủy
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for dynamic formset -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('add-choice');
+    const formset = document.getElementById('choice-formset');
+    let formCount = parseInt(document.getElementById('id_choices-TOTAL_FORMS').value);
+
+    addButton.addEventListener('click', function() {
+        if (formCount >= 6) {
+            alert('Tối đa 6 lựa chọn!');
+            return;
+        }
+
+        const newForm = document.createElement('div');
+        newForm.className = 'choice-form mb-3 p-3 border rounded new-choice';
+        newForm.innerHTML = `
+            <div class="row align-items-center">
+                <div class="col-md-1">
+                    <div class="form-check">
+                        <input type="checkbox" name="choices-${formCount}-is_correct" id="id_choices-${formCount}-is_correct" class="form-check-input">
+                        <label for="id_choices-${formCount}-is_correct" class="form-check-label">Đúng</label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <label for="id_choices-${formCount}-order" class="form-label small">Thứ tự</label>
+                    <input type="number" name="choices-${formCount}-order" id="id_choices-${formCount}-order" class="form-control" value="${formCount}" min="0" max="5">
+                </div>
+                <div class="col-md-8">
+                    <label for="id_choices-${formCount}-choice_text" class="form-label">Nội dung lựa chọn</label>
+                    <input type="text" name="choices-${formCount}-choice_text" id="id_choices-${formCount}-choice_text" class="form-control" placeholder="Nhập nội dung lựa chọn...">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-sm btn-danger remove-choice">
+                        <i class="fas fa-times"></i> Xóa
+                    </button>
+                </div>
+            </div>
+        `;
+
+        formset.appendChild(newForm);
+        formCount++;
+        document.getElementById('id_choices-TOTAL_FORMS').value = formCount;
+    });
+
+    // Remove choice functionality
+    formset.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-choice') || e.target.closest('.remove-choice')) {
+            const choiceForm = e.target.closest('.choice-form');
+            if (choiceForm.classList.contains('new-choice')) {
+                choiceForm.remove();
+                formCount--;
+                document.getElementById('id_choices-TOTAL_FORMS').value = formCount;
+                // Reorder remaining forms
+                const remainingForms = formset.querySelectorAll('.new-choice');
+                remainingForms.forEach((form, index) => {
+                    const inputs = form.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        const name = input.name.replace(/choices-\d+-/, `choices-${index}-`);
+                        const id = input.id.replace(/id_choices-\d+-/, `id_choices-${index}-`);
+                        input.name = name;
+                        input.id = id;
+                    });
+                    const labels = form.querySelectorAll('label');
+                    labels.forEach(label => {
+                        if (label.getAttribute('for')) {
+                            const forAttr = label.getAttribute('for').replace(/id_choices-\d+-/, `id_choices-${index}-`);
+                            label.setAttribute('for', forAttr);
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+    // Form validation
+    document.getElementById('questionForm').addEventListener('submit', function(e) {
+        const correctChoices = document.querySelectorAll('input[name*="-is_correct"]:checked');
+        if (correctChoices.length === 0) {
+            e.preventDefault();
+            alert('Phải có ít nhất một đáp án đúng!');
+            return false;
+        }
+        if (correctChoices.length > 1) {
+            e.preventDefault();
+            alert('Chỉ được có một đáp án đúng!');
+            return false;
+        }
+
+        const choiceTexts = document.querySelectorAll('input[name*="-choice_text"]');
+        let filledChoices = 0;
+        choiceTexts.forEach(input => {
+            if (input.value.trim() !== '') {
+                filledChoices++;
+            }
+        });
+
+        if (filledChoices < 2) {
+            e.preventDefault();
+            alert('Phải có ít nhất 2 lựa chọn!');
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

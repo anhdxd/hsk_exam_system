@@ -1,1 +1,26 @@
- 
+INFO 2025-06-10 17:23:26,164 basehttp 33136 54064 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-10 17:23:30,509 basehttp 33136 54064 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-10 17:23:31,555 basehttp 33136 54064 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-10 17:25:52,466 basehttp 33136 54064 "GET /questions/ HTTP/1.1" 200 43009
+INFO 2025-06-10 17:25:55,951 basehttp 33136 54064 "GET /questions/?search=&hsk_level=&question_type=2&difficulty=easy&is_active= HTTP/1.1" 200 9173
+INFO 2025-06-10 17:25:57,998 basehttp 33136 54064 "GET /questions/?search=&hsk_level=&question_type=&difficulty=easy&is_active= HTTP/1.1" 200 30507
+INFO 2025-06-10 17:26:21,097 basehttp 33136 54064 "GET / HTTP/1.1" 302 0
+INFO 2025-06-10 17:26:21,112 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:26:29,651 basehttp 33136 54064 "GET /questions/import/ HTTP/1.1" 200 15315
+INFO 2025-06-10 17:26:33,549 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:27:03,481 basehttp 33136 54064 "GET / HTTP/1.1" 302 0
+INFO 2025-06-10 17:27:03,493 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:27:08,083 basehttp 33136 54064 "GET / HTTP/1.1" 302 0
+INFO 2025-06-10 17:27:08,095 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:27:08,872 basehttp 33136 54064 "GET / HTTP/1.1" 302 0
+INFO 2025-06-10 17:27:08,886 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:27:35,790 basehttp 33136 54064 "GET / HTTP/1.1" 302 0
+INFO 2025-06-10 17:27:35,803 basehttp 33136 54064 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:30:36,540 autoreload 33136 40804 D:\anhdxd\hsk_exam_system\apps\questions\views.py changed, reloading.
+INFO 2025-06-10 17:30:37,100 autoreload 13924 58008 Watching for file changes with StatReloader
+INFO 2025-06-10 17:30:38,634 autoreload 13924 58008 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-10 17:30:39,091 autoreload 21900 43344 Watching for file changes with StatReloader
+INFO 2025-06-10 17:30:42,720 autoreload 21900 43344 D:\anhdxd\hsk_exam_system\apps\questions\models.py changed, reloading.
+INFO 2025-06-10 17:30:43,175 autoreload 55224 28780 Watching for file changes with StatReloader
+INFO 2025-06-10 17:30:46,817 autoreload 55224 28780 D:\anhdxd\hsk_exam_system\apps\questions\urls.py changed, reloading.
+INFO 2025-06-10 17:30:47,646 autoreload 36704 16812 Watching for file changes with StatReloader

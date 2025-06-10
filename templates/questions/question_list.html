@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}Danh sách câu hỏi - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-question-circle"></i> Danh sách câu hỏi</h2>
+        <div>
+          <a href="{% url 'questions:import' %}" class="btn btn-info me-2">
+            <i class="fas fa-upload"></i> Import câu hỏi
+          </a>
+          <a href="{% url 'questions:create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Tạo câu hỏi mới
+          </a>
+        </div>
+      </div>
+
+      <!-- Search Form -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <form method="get" class="row g-3">
+            <div class="col-md-3">
+              {{ search_form.search.label_tag }} {{ search_form.search }}
+            </div>
+            <div class="col-md-2">
+              {{ search_form.hsk_level.label_tag }} {{ search_form.hsk_level }}
+            </div>            <div class="col-md-2">
+              {{ search_form.question_type.label_tag }}
+              {{ search_form.question_type }}
+            </div>
+            <div class="col-md-2">
+              {{ search_form.difficulty.label_tag }}
+              {{ search_form.difficulty }}
+            </div>            <div class="col-md-2">
+              {{ search_form.is_active.label_tag }}
+              {{ search_form.is_active }}
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+              <button type="submit" class="btn btn-secondary w-100">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Results Summary -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p class="text-muted">
+            Tìm thấy <strong>{{ total_questions }}</strong> câu hỏi
+          </p>
+        </div>
+        <div class="col-md-6 text-end">
+          <a href="{% url 'questions:banks_list' %}" class="btn btn-outline-primary">
+            <i class="fas fa-database"></i> Ngân hàng câu hỏi
+          </a>
+        </div>
+      </div>
+
+      <!-- Questions List -->
+      {% if questions %}
+      <div class="row">
+        {% for question in questions %}
+        <div class="col-md-6 mb-4">
+          <div class="card h-100">
+            <div class="card-header d-flex justify-content-between">
+              <span class="badge bg-info">HSK {{ question.hsk_level.level }}</span>
+              <span class="badge bg-secondary">{{ question.get_difficulty_display }}</span>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">{{ question.question_type.name }}</h6>
+              <p class="card-text">
+                {{ question.question_text|truncatewords:15 }}
+              </p>
+
+              {% if question.passage %}
+              <p class="text-muted small">
+                <i class="fas fa-book"></i> Có đoạn văn đọc hiểu
+              </p>
+              {% endif %} {% if question.audio_file %}
+              <p class="text-muted small">
+                <i class="fas fa-volume-up"></i> Có file âm thanh
+              </p>
+              {% endif %}
+
+              <div class="mt-2">
+                <small class="text-muted">
+                  <i class="fas fa-star"></i> {{ question.points }} điểm |
+                  <i class="fas fa-list"></i> {{ question.choices.count }} lựa
+                  chọn
+                </small>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="btn-group" role="group">
+                <a href="{% url 'questions:detail' question.pk %}" class="btn btn-sm btn-outline-primary">
+                  <i class="fas fa-eye"></i> Xem
+                </a>
+                <a href="{% url 'questions:edit' question.pk %}" class="btn btn-sm btn-outline-warning">
+                  <i class="fas fa-edit"></i> Sửa
+                </a>
+                <a href="{% url 'questions:delete' question.pk %}" class="btn btn-sm btn-outline-danger"
+                  onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')">
+                  <i class="fas fa-trash"></i> Xóa
+                </a>
+              </div>
+              <span class="float-end">
+                {% if question.is_active %}
+                <span class="badge bg-success">Kích hoạt</span>
+                {% else %}
+                <span class="badge bg-warning">Tạm dừng</span>
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>      <!-- Pagination -->
+      {% if is_paginated %}
+      <nav aria-label="Questions pagination">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link"
+              href="?page=1{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}{% if search_form.question_type.value %}&question_type={{ search_form.question_type.value|urlencode }}{% endif %}{% if search_form.difficulty.value %}&difficulty={{ search_form.difficulty.value|urlencode }}{% endif %}{% if search_form.is_active.value %}&is_active={{ search_form.is_active.value|urlencode }}{% endif %}">Đầu</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link"
+              href="?page={{ page_obj.previous_page_number }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}{% if search_form.question_type.value %}&question_type={{ search_form.question_type.value|urlencode }}{% endif %}{% if search_form.difficulty.value %}&difficulty={{ search_form.difficulty.value|urlencode }}{% endif %}{% if search_form.is_active.value %}&is_active={{ search_form.is_active.value|urlencode }}{% endif %}">Trước</a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link"
+              href="?page={{ page_obj.next_page_number }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}{% if search_form.question_type.value %}&question_type={{ search_form.question_type.value|urlencode }}{% endif %}{% if search_form.difficulty.value %}&difficulty={{ search_form.difficulty.value|urlencode }}{% endif %}{% if search_form.is_active.value %}&is_active={{ search_form.is_active.value|urlencode }}{% endif %}">Sau</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link"
+              href="?page={{ page_obj.paginator.num_pages }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}{% if search_form.question_type.value %}&question_type={{ search_form.question_type.value|urlencode }}{% endif %}{% if search_form.difficulty.value %}&difficulty={{ search_form.difficulty.value|urlencode }}{% endif %}{% if search_form.is_active.value %}&is_active={{ search_form.is_active.value|urlencode }}{% endif %}">Cuối</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}{% else %}
+      <div class="text-center py-5">
+        <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
+        <h4>Không tìm thấy câu hỏi nào</h4>
+        <p class="text-muted">
+          Hãy thử tạo câu hỏi mới hoặc điều chỉnh bộ lọc tìm kiếm.
+        </p>
+        <a href="{% url 'questions:create' %}" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Tạo câu hỏi đầu tiên
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

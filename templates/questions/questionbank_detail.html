@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }} - Ngân hàng câu hỏi - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="fas fa-database"></i> {{ object.name }}
+                    <span class="badge bg-info ms-2">{{ object.hsk_level.name }}</span>
+                </h2>
+                <div>
+                    <a href="{% url 'questions:banks_update' object.pk %}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Chỉnh sửa
+                    </a>
+                    <a href="{% url 'questions:banks_list' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bank Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle"></i> Thông tin ngân hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Tên:</strong></td>
+                                    <td>{{ object.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cấp độ HSK:</strong></td>
+                                    <td><span class="badge bg-info">{{ object.hsk_level.name }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trạng thái:</strong></td>
+                                    <td>
+                                        {% if object.is_active %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check-circle"></i> Hoạt động
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-times-circle"></i> Ngừng hoạt động
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Số câu hỏi:</strong></td>
+                                    <td>
+                                        <span class="badge bg-primary">{{ object.question_count }} câu</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            {% if object.description %}
+                                <h6>Mô tả:</h6>
+                                <p class="text-muted">{{ object.description }}</p>
+                            {% else %}
+                                <p class="text-muted fst-italic">Chưa có mô tả</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Statistics -->
+            {% if questions_by_type %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-pie"></i> Thống kê câu hỏi theo loại</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for stat in questions_by_type %}
+                                <div class="col-md-3 mb-3">
+                                    <div class="text-center p-3 border rounded">
+                                        <h4 class="text-primary">{{ stat.count }}</h4>
+                                        <small class="text-muted">{{ stat.question_type__name }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Questions List -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5><i class="fas fa-list"></i> Danh sách câu hỏi</h5>
+                    <div>
+                        <a href="{% url 'questions:create' %}?bank={{ object.pk }}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus"></i> Thêm câu hỏi
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if object.questions.exists %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th width="45%">Câu hỏi</th>
+                                        <th width="15%">Loại</th>
+                                        <th width="10%">Độ khó</th>
+                                        <th width="10%">Điểm</th>
+                                        <th width="10%">Trạng thái</th>
+                                        <th width="5%">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for question in object.questions.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>
+                                                <a href="{% url 'questions:detail' question.pk %}" class="text-decoration-none">
+                                                    {{ question.question_text|truncatewords:10 }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">{{ question.question_type.name }}</span>
+                                            </td>
+                                            <td>
+                                                {% if question.difficulty == 'easy' %}
+                                                    <span class="badge bg-success">Dễ</span>
+                                                {% elif question.difficulty == 'medium' %}
+                                                    <span class="badge bg-warning">Trung bình</span>
+                                                {% elif question.difficulty == 'hard' %}
+                                                    <span class="badge bg-danger">Khó</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">-</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ question.points }}</td>
+                                            <td>
+                                                {% if question.is_active %}
+                                                    <span class="badge bg-success">Hoạt động</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Ngừng</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                                            type="button" data-bs-toggle="dropdown">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </button>                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" 
+                                                               href="{% url 'questions:detail' question.pk %}">
+                                                                <i class="fas fa-eye"></i> Xem
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" 
+                                                               href="{% url 'questions:edit' question.pk %}">
+                                                                <i class="fas fa-edit"></i> Sửa
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Chưa có câu hỏi nào</h5>
+                            <p class="text-muted">Hãy thêm câu hỏi vào ngân hàng này.</p>
+                            <a href="{% url 'questions:create' %}?bank={{ object.pk }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Thêm câu hỏi đầu tiên
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

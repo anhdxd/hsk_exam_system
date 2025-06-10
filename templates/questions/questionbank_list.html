@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}Ngân hàng câu hỏi - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="fas fa-database"></i> Ngân hàng câu hỏi
+                </h2>
+                <a href="{% url 'questions:banks_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tạo ngân hàng mới
+                </a>
+            </div>            <!-- Filters -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            {{ search_form.hsk_level.label_tag }}
+                            {{ search_form.hsk_level }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ search_form.search.label_tag }}
+                            {{ search_form.search }}
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-outline-primary me-2">
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                            <a href="{% url 'questions:banks_list' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times"></i> Xóa bộ lọc
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Question Banks List -->
+            {% if object_list %}
+                <div class="row">
+                    {% for bank in object_list %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="card-title mb-0">
+                                        <span class="badge bg-info">{{ bank.hsk_level.name }}</span>
+                                    </h6>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                                type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'questions:banks_detail' bank.pk %}">
+                                                    <i class="fas fa-eye"></i> Xem chi tiết
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'questions:banks_update' bank.pk %}">
+                                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item text-danger" 
+                                                   href="{% url 'questions:banks_delete' bank.pk %}">
+                                                    <i class="fas fa-trash"></i> Xóa
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ bank.name }}</h5>
+                                    {% if bank.description %}
+                                        <p class="card-text text-muted">{{ bank.description|truncatewords:15 }}</p>
+                                    {% endif %}
+                                    
+                                    <div class="row text-center mt-3">
+                                        <div class="col-6">
+                                            <div class="border-end">
+                                                <h6 class="text-primary mb-1">{{ bank.question_count }}</h6>
+                                                <small class="text-muted">Câu hỏi</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="{% if bank.is_active %}text-success{% else %}text-danger{% endif %} mb-1">
+                                                {% if bank.is_active %}
+                                                    <i class="fas fa-check-circle"></i> Hoạt động
+                                                {% else %}
+                                                    <i class="fas fa-times-circle"></i> Ngừng
+                                                {% endif %}
+                                            </h6>
+                                            <small class="text-muted">Trạng thái</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{% url 'questions:banks_detail' bank.pk %}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i> Xem
+                                        </a>
+                                        <a href="{% url 'questions:banks_update' bank.pk %}" 
+                                           class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i> Sửa
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>                <!-- Pagination -->
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" 
+                                       href="?page=1{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" 
+                                       href="?page={{ page_obj.previous_page_number }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ num }}</span>
+                                    </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" 
+                                           href="?page={{ num }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}">
+                                            {{ num }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" 
+                                       href="?page={{ page_obj.next_page_number }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" 
+                                       href="?page={{ page_obj.paginator.num_pages }}{% if search_form.search.value %}&search={{ search_form.search.value|urlencode }}{% endif %}{% if search_form.hsk_level.value %}&hsk_level={{ search_form.hsk_level.value|urlencode }}{% endif %}">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-database fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">Chưa có ngân hàng câu hỏi nào</h4>
+                    <p class="text-muted">Hãy tạo ngân hàng câu hỏi đầu tiên để bắt đầu.</p>
+                    <a href="{% url 'questions:banks_create' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tạo ngân hàng đầu tiên
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

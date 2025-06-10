@@ -31,7 +31,7 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('accounts/', include('apps.accounts.urls')),
     # path('exams/', include('apps.exams.urls')),
-    # path('questions/', include('apps.questions.urls')),
+    path('questions/', include('apps.questions.urls')),
     # path('submissions/', include('apps.submissions.urls')),
     # path('analytics/', include('apps.analytics.urls')),
 ]

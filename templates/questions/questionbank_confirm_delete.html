@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Xác nhận xóa ngân hàng - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i> Xác nhận xóa ngân hàng
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-warning"></i>
+                        <strong>Cảnh báo:</strong> Bạn có chắc chắn muốn xóa ngân hàng câu hỏi này không?
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Thông tin ngân hàng sẽ bị xóa:</h6>
+                        <div class="border rounded p-3 bg-light">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p><strong>Tên:</strong> {{ object.name }}</p>
+                                    <p><strong>Cấp độ HSK:</strong> 
+                                        <span class="badge bg-info">{{ object.hsk_level.name }}</span>
+                                    </p>
+                                    <p><strong>Số câu hỏi:</strong> 
+                                        <span class="badge bg-primary">{{ object.question_count }} câu</span>
+                                    </p>
+                                    {% if object.description %}
+                                        <p><strong>Mô tả:</strong> {{ object.description|truncatewords:20 }}</p>
+                                    {% endif %}
+                                    <p><strong>Trạng thái:</strong>
+                                        {% if object.is_active %}
+                                            <span class="badge bg-success">Hoạt động</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Ngừng hoạt động</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if object.questions.exists %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Lưu ý:</strong> Ngân hàng này hiện có {{ object.question_count }} câu hỏi. 
+                            Các câu hỏi sẽ không bị xóa, chỉ bị gỡ khỏi ngân hàng này.
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="text-center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg me-3">
+                            <i class="fas fa-trash"></i> Xác nhận xóa
+                        </button>
+                        <a href="{% url 'questions:banks_detail' object.pk %}" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-times"></i> Hủy bỏ
+                        </a>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <small>
+                        <i class="fas fa-exclamation-circle"></i>
+                        Hành động này không thể hoàn tác!
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+[
+    {
+        "model": "questions.questiontype",
+        "pk": 1,
+        "fields": {
+            "name": "Đọc hiểu",
+            "description": "Câu hỏi đọc hiểu văn bản tiếng Trung"
+        }
+    },
+    {
+        "model": "questions.questiontype",
+        "pk": 2,
+        "fields": {
+            "name": "Nghe hiểu",
+            "description": "Câu hỏi nghe hiểu âm thanh tiếng Trung"
+        }
+    },
+    {
+        "model": "questions.questiontype",
+        "pk": 3,
+        "fields": {
+            "name": "Từ vựng",
+            "description": "Câu hỏi về từ vựng tiếng Trung"
+        }
+    },
+    {
+        "model": "questions.questiontype",
+        "pk": 4,
+        "fields": {
+            "name": "Ngữ pháp",
+            "description": "Câu hỏi về ngữ pháp tiếng Trung"
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 1,
+        "fields": {
+            "level": 1,
+            "name": "HSK 1",
+            "description": "Cấp độ cơ bản nhất - 150 từ vựng",
+            "vocabulary_count": 150
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 2,
+        "fields": {
+            "level": 2,
+            "name": "HSK 2",
+            "description": "Cấp độ cơ bản - 300 từ vựng",
+            "vocabulary_count": 300
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 3,
+        "fields": {
+            "level": 3,
+            "name": "HSK 3",
+            "description": "Cấp độ trung cấp - 600 từ vựng",
+            "vocabulary_count": 600
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 4,
+        "fields": {
+            "level": 4,
+            "name": "HSK 4",
+            "description": "Cấp độ trung cấp cao - 1200 từ vựng",
+            "vocabulary_count": 1200
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 5,
+        "fields": {
+            "level": 5,
+            "name": "HSK 5",
+            "description": "Cấp độ cao - 2500 từ vựng",
+            "vocabulary_count": 2500
+        }
+    },
+    {
+        "model": "common.hsklevel",
+        "pk": 6,
+        "fields": {
+            "level": 6,
+            "name": "HSK 6",
+            "description": "Cấp độ thành thạo - 5000+ từ vựng",
+            "vocabulary_count": 5000
+        }
+    }
+]

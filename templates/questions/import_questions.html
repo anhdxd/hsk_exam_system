@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Import câu hỏi - HSK Exam System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-upload"></i> Import câu hỏi</h2>
+                <a href="{% url 'questions:list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+
+            <!-- Import Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-file-import"></i> Upload file câu hỏi</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.file_type.id_for_label }}" class="form-label">
+                                    {{ form.file_type.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.file_type }}
+                                {% if form.file_type.errors %}
+                                    <div class="text-danger">{{ form.file_type.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.hsk_level.id_for_label }}" class="form-label">
+                                    {{ form.hsk_level.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.hsk_level }}
+                                <div class="form-text">{{ form.hsk_level.help_text }}</div>
+                                {% if form.hsk_level.errors %}
+                                    <div class="text-danger">{{ form.hsk_level.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.file.id_for_label }}" class="form-label">
+                                {{ form.file.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.file }}
+                            <div class="form-text">{{ form.file.help_text }}</div>
+                            {% if form.file.errors %}
+                                <div class="text-danger">{{ form.file.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <hr>
+
+                        <h6><i class="fas fa-database"></i> Cấu hình ngân hàng câu hỏi</h6>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                {{ form.create_new_bank }}
+                                <label for="{{ form.create_new_bank.id_for_label }}" class="form-check-label">
+                                    {{ form.create_new_bank.label }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" id="new-bank-name-group" style="display: none;">
+                            <label for="{{ form.new_bank_name.id_for_label }}" class="form-label">
+                                {{ form.new_bank_name.label }}
+                            </label>
+                            {{ form.new_bank_name }}
+                            <div class="form-text">{{ form.new_bank_name.help_text }}</div>
+                            {% if form.new_bank_name.errors %}
+                                <div class="text-danger">{{ form.new_bank_name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3" id="existing-bank-group">
+                            <label for="{{ form.question_bank.id_for_label }}" class="form-label">
+                                {{ form.question_bank.label }}
+                            </label>
+                            {{ form.question_bank }}
+                            <div class="form-text">{{ form.question_bank.help_text }}</div>
+                            {% if form.question_bank.errors %}
+                                <div class="text-danger">{{ form.question_bank.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <hr>
+
+                        <h6><i class="fas fa-cog"></i> Tùy chọn import</h6>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                {{ form.overwrite_duplicates }}
+                                <label for="{{ form.overwrite_duplicates.id_for_label }}" class="form-check-label">
+                                    {{ form.overwrite_duplicates.label }}
+                                </label>
+                            </div>
+                            <div class="form-text">{{ form.overwrite_duplicates.help_text }}</div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-upload"></i> Bắt đầu import
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Format Instructions -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle"></i> Hướng dẫn định dạng file</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Định dạng CSV:</h6>
+                            <p>File CSV phải có các cột sau:</p>
+                            <ul>
+                                <li><code>question_text</code> - Nội dung câu hỏi</li>
+                                <li><code>question_type</code> - Loại câu hỏi</li>
+                                <li><code>difficulty</code> - Độ khó (easy/medium/hard)</li>
+                                <li><code>passage</code> - Đoạn văn (tùy chọn)</li>
+                                <li><code>explanation</code> - Giải thích (tùy chọn)</li>
+                                <li><code>points</code> - Điểm số (mặc định 1)</li>
+                                <li><code>choice_A</code> - Lựa chọn A</li>
+                                <li><code>choice_B</code> - Lựa chọn B</li>
+                                <li><code>choice_C</code> - Lựa chọn C</li>
+                                <li><code>choice_D</code> - Lựa chọn D</li>
+                                <li><code>correct_answer</code> - Đáp án đúng (A/B/C/D)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Định dạng JSON:</h6>
+                            <p>File JSON phải có cấu trúc:</p>
+                            <pre class="bg-light p-2 rounded small"><code>{
+  "questions": [
+    {
+      "question_text": "Câu hỏi...",
+      "question_type": "Loại câu hỏi",
+      "difficulty": "medium",
+      "passage": "Đoạn văn...",
+      "explanation": "Giải thích...",
+      "points": 1,
+      "choices": [
+        {
+          "text": "Lựa chọn A",
+          "is_correct": false
+        },
+        {
+          "text": "Lựa chọn B", 
+          "is_correct": true
+        }
+      ]
+    }
+  ]
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const createNewBankCheckbox = document.getElementById('{{ form.create_new_bank.id_for_label }}');
+    const newBankNameGroup = document.getElementById('new-bank-name-group');
+    const existingBankGroup = document.getElementById('existing-bank-group');
+
+    function toggleBankGroups() {
+        if (createNewBankCheckbox.checked) {
+            newBankNameGroup.style.display = 'block';
+            existingBankGroup.style.display = 'none';
+        } else {
+            newBankNameGroup.style.display = 'none';
+            existingBankGroup.style.display = 'block';
+        }
+    }
+
+    createNewBankCheckbox.addEventListener('change', toggleBankGroups);
+    toggleBankGroups(); // Initial state
+});
+</script>
+{% endblock %}
