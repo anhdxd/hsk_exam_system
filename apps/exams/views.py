@@ -158,6 +158,21 @@ class ExamDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'exams/exam_confirm_delete.html'
     success_url = reverse_lazy('exams:list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        exam = self.get_object()
+        
+        # Get session statistics
+        all_sessions = exam.examsession_set.all()
+        context.update({
+            'total_sessions': all_sessions.count(),
+            'completed_sessions': all_sessions.filter(status='completed').count(),
+            'in_progress_sessions': all_sessions.filter(status='in_progress').count(),
+            'has_in_progress': all_sessions.filter(status='in_progress').exists(),
+        })
+        
+        return context
+
     def delete(self, request, *args, **kwargs):
         messages.success(
             request,

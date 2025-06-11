@@ -6,118 +6,10 @@
 {% endblock %}
 
 {% block extra_css %}
-<style>
-    .form-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 2rem 0;
-        margin-bottom: 2rem;
-    }
-
-    .form-container {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .form-section {
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        border: 1px solid #e9ecef;
-        border-radius: 10px;
-        background: #f8f9fa;
-    }
-
-    .form-section h5 {
-        color: #667eea;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #e9ecef;
-    }
-
-    .form-group label {
-        font-weight: 600;
-        color: #495057;
-        margin-bottom: 0.5rem;
-    }
-
-    .form-control:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    }
-
-    .btn-save {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        border: none;
-        color: white;
-        padding: 12px 30px;
-        font-size: 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-save:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-        color: white;
-    }
-
-    .btn-cancel {
-        background: #6c757d;
-        border: none;
-        color: white;
-        padding: 12px 30px;
-        font-size: 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-cancel:hover {
-        background: #5a6268;
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    .help-text {
-        font-size: 0.875rem;
-        color: #6c757d;
-        margin-top: 0.25rem;
-    }
-
-    .form-check-input:checked {
-        background-color: #667eea;
-        border-color: #667eea;
-    }
-
-    .invalid-feedback {
-        display: block;
-    }
-
-    .form-row .col-md-6 {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-
-    .datetime-input {
-        position: relative;
-    }
-
-    .datetime-input input[type="datetime-local"] {
-        padding-right: 2.5rem;
-    }
-
-    .datetime-icon {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #6c757d;
-        pointer-events: none;
-    }
-</style>
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/variables.css' %}">
+<link rel="stylesheet" href="{% static 'css/exams/exam_common.css' %}">
+<link rel="stylesheet" href="{% static 'css/exams/exam_form.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
 <div class="form-header">
@@ -180,8 +72,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="{{ form.question_bank.id_for_label }}">{{ form.question_bank.label
-                                    }}</label>
+                                <label for="{{ form.question_bank.id_for_label }}">{{ form.question_bank.label}}</label>
                                 {{ form.question_bank }}
                                 {% if form.question_bank.help_text %}
                                 <small class="help-text">{{ form.question_bank.help_text }}</small>
@@ -201,8 +92,7 @@
                     <div class="form-row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="{{ form.total_questions.id_for_label }}">{{ form.total_questions.label
-                                    }}</label>
+                                <label for="{{ form.total_questions.id_for_label }}">{{ form.total_questions.label}}</label>
                                 {{ form.total_questions }}
                                 {% if form.total_questions.help_text %}
                                 <small class="help-text">{{ form.total_questions.help_text }}</small>
@@ -214,8 +104,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="{{ form.duration_minutes.id_for_label }}">{{ form.duration_minutes.label
-                                    }}</label>
+                                <label for="{{ form.duration_minutes.id_for_label }}">{{ form.duration_minutes.label}}</label>
                                 {{ form.duration_minutes }}
                                 {% if form.duration_minutes.help_text %}
                                 <small class="help-text">{{ form.duration_minutes.help_text }}</small>
@@ -227,8 +116,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="{{ form.passing_score.id_for_label }}">{{ form.passing_score.label
-                                    }}</label>
+                                <label for="{{ form.passing_score.id_for_label }}">{{ form.passing_score.label}}</label>
                                 {{ form.passing_score }}
                                 {% if form.passing_score.help_text %}
                                 <small class="help-text">{{ form.passing_score.help_text }}</small>

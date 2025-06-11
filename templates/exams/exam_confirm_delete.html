@@ -4,146 +4,10 @@
 {% block title %}Xóa kỳ thi - {{ exam.title }}{% endblock %}
 
 {% block extra_css %}
-<style>
-    .delete-header {
-        background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
-        color: white;
-        padding: 2rem 0;
-        margin-bottom: 2rem;
-    }
-    
-    .delete-container {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        margin-bottom: 2rem;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .warning-icon {
-        font-size: 4rem;
-        color: #dc3545;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
-    .exam-info {
-        background: #f8f9fa;
-        border-left: 4px solid #dc3545;
-        padding: 1.5rem;
-        border-radius: 0 8px 8px 0;
-        margin: 1.5rem 0;
-    }
-    
-    .info-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #e9ecef;
-    }
-    
-    .info-item:last-child {
-        border-bottom: none;
-    }
-    
-    .info-label {
-        font-weight: 600;
-        color: #495057;
-    }
-    
-    .info-value {
-        color: #6c757d;
-    }
-    
-    .consequences-list {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 1.5rem;
-        border-radius: 0 8px 8px 0;
-        margin: 1.5rem 0;
-    }
-    
-    .consequences-list ul {
-        margin: 0;
-        padding-left: 1.5rem;
-    }
-    
-    .consequences-list li {
-        margin-bottom: 0.5rem;
-        color: #856404;
-    }
-    
-    .btn-delete-confirm {
-        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-        border: none;
-        color: white;
-        padding: 12px 30px;
-        font-size: 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-delete-confirm:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
-        color: white;
-    }
-    
-    .btn-cancel {
-        background: #6c757d;
-        border: none;
-        color: white;
-        padding: 12px 30px;
-        font-size: 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-cancel:hover {
-        background: #5a6268;
-        color: white;
-        transform: translateY(-2px);
-    }
-    
-    .checkbox-container {
-        background: #f8d7da;
-        border: 2px solid #f5c6cb;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        color: #721c24;
-    }
-    
-    .form-check-label {
-        font-weight: 500;
-        cursor: pointer;
-    }
-    
-    .stats-warning {
-        background: #e2e3e5;
-        border-radius: 8px;
-        padding: 1rem;
-        margin: 1rem 0;
-        text-align: center;
-    }
-    
-    .stat-number {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #dc3545;
-        display: block;
-    }
-    
-    .stat-label {
-        color: #6c757d;
-        font-size: 0.9rem;
-    }
-</style>
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/variables.css' %}">
+<link rel="stylesheet" href="{% static 'css/exams/exam_common.css' %}">
+<link rel="stylesheet" href="{% static 'css/exams/exam_confirm_delete.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
 <div class="delete-header">
@@ -209,25 +73,33 @@
         </div>
         
         <!-- Statistics Warning -->
-        {% if exam.examsession_set.count > 0 %}
-        <div class="stats-warning">
+        {% if total_sessions > 0 %}
+        <div class="stats-section">
             <h6 class="text-danger mb-3">
                 <i class="fas fa-chart-bar"></i> Dữ liệu sẽ bị mất
             </h6>
             <div class="row">
                 <div class="col-md-4">
-                    <span class="stat-number">{{ exam.examsession_set.count }}</span>
+                    <span class="stat-number">{{ total_sessions }}</span>
                     <div class="stat-label">Phiên thi</div>
                 </div>
                 <div class="col-md-4">
-                    <span class="stat-number">{{ exam.examsession_set.filter.status.completed.count }}</span>
+                    <span class="stat-number">{{ completed_sessions }}</span>
                     <div class="stat-label">Đã hoàn thành</div>
                 </div>
                 <div class="col-md-4">
-                    <span class="stat-number">{{ exam.examsession_set.filter.status.in_progress.count }}</span>
+                    <span class="stat-number">{{ in_progress_sessions }}</span>
                     <div class="stat-label">Đang thi</div>
                 </div>
             </div>
+        </div>
+        {% endif %}
+        
+        <!-- In Progress Warning -->
+        {% if has_in_progress %}
+        <div class="in-progress-warning">
+            <h6><i class="fas fa-exclamation-circle"></i> CẢNH BÁO QUAN TRỌNG</h6>
+            <p>Hiện có <strong>{{ in_progress_sessions }}</strong> phiên thi đang diễn ra. Việc xóa kỳ thi sẽ gián đoạn các phiên thi này!</p>
         </div>
         {% endif %}
         
@@ -241,8 +113,8 @@
                 <li>Tất cả phiên thi của học viên sẽ bị xóa</li>
                 <li>Kết quả thi và thống kê sẽ bị mất</li>
                 <li>Không thể khôi phục dữ liệu sau khi xóa</li>
-                {% if exam.examsession_set.filter.status.in_progress.exists %}
-                <li><strong>Có {{ exam.examsession_set.filter.status.in_progress.count }} phiên thi đang diễn ra sẽ bị gián đoạn</strong></li>
+                {% if has_in_progress %}
+                <li><strong>Có {{ in_progress_sessions }} phiên thi đang diễn ra sẽ bị gián đoạn</strong></li>
                 {% endif %}
             </ul>
         </div>
@@ -251,7 +123,7 @@
             {% csrf_token %}
             
             <!-- Confirmation Checkbox -->
-            <div class="checkbox-container">
+            <div class="alert-danger-custom">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="confirmDelete" required>
                     <label class="form-check-label" for="confirmDelete">
@@ -267,21 +139,21 @@
                     Để xác nhận, vui lòng nhập "<strong>{{ exam.title }}</strong>" vào ô bên dưới:
                 </label>
                 <input type="text" 
-                       class="form-control" 
+                       class="form-control confirmation-text" 
                        id="confirmText" 
                        placeholder="Nhập tên kỳ thi để xác nhận"
                        required>
             </div>
             
             <!-- Action Buttons -->
-            <div class="text-center">
+            <div class="delete-actions">
                 <button type="submit" 
-                        class="btn btn-delete-confirm mr-3" 
+                        class="btn btn-delete-confirm" 
                         id="deleteButton" 
                         disabled>
                     <i class="fas fa-trash"></i> Xóa vĩnh viễn
                 </button>
-                <a href="{% url 'exams:detail' exam.pk %}" class="btn btn-cancel">
+                <a href="{% url 'exams:detail' exam.pk %}" class="btn btn-cancel-delete">
                     <i class="fas fa-times"></i> Hủy bỏ
                 </a>
             </div>
@@ -304,13 +176,9 @@ $(document).ready(function() {
         const textMatches = confirmText.val().trim() === examTitle;
         
         if (isChecked && textMatches) {
-            deleteButton.prop('disabled', false)
-                .removeClass('btn-secondary')
-                .addClass('btn-delete-confirm');
+            deleteButton.prop('disabled', false);
         } else {
-            deleteButton.prop('disabled', true)
-                .removeClass('btn-delete-confirm')
-                .addClass('btn-secondary');
+            deleteButton.prop('disabled', true);
         }
     }
     
@@ -349,10 +217,10 @@ $(document).ready(function() {
     });
     
     // Warn about active sessions
-    {% if exam.examsession_set.filter.status.in_progress.exists %}
+    {% if has_in_progress %}
     setTimeout(function() {
         alert(
-            'CẢNH BÁO: Có {{ exam.examsession_set.filter.status.in_progress.count }} phiên thi đang diễn ra!\n\n' +
+            'CẢNH BÁO: Có {{ in_progress_sessions }} phiên thi đang diễn ra!\n\n' +
             'Việc xóa kỳ thi sẽ gián đoạn các phiên thi này và có thể gây khó chịu cho học viên.'
         );
     }, 1000);

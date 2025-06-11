@@ -1,0 +1,190 @@
+/* Exam List Specific Styles */
+
+/* Search section */
+.search-card {
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.search-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Recent sessions table */
+.recent-sessions-card {
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+}
+
+.recent-sessions-card .card-header {
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border-light);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.recent-sessions-card .table {
+    margin-bottom: 0;
+}
+
+.recent-sessions-card .badge {
+    font-size: 0.75rem;
+}
+
+/* Exam cards */
+.exam-card {
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.exam-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.exam-card .card-header {
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border-light);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.exam-card .card-body {
+    padding: 1.5rem;
+}
+
+.exam-card .card-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.exam-card .card-text {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.exam-card .list-unstyled {
+    margin-bottom: 1.5rem;
+}
+
+.exam-card .list-unstyled li {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.exam-card .list-unstyled li i {
+    width: 1.2rem;
+    color: var(--primary-color);
+}
+
+/* Action buttons */
+.exam-card .btn-group .btn {
+    border-radius: var(--border-radius-sm);
+}
+
+.exam-card .btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.exam-card .btn-primary:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+/* Results summary */
+.results-summary {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 2rem;
+}
+
+.pagination .page-link {
+    border-radius: var(--border-radius-sm);
+    color: var(--primary-color);
+    margin: 0 0.125rem;
+    border: 1px solid var(--border-light);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* Status badges */
+.badge.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger-color) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .exam-card .card-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .exam-card .btn-group {
+        width: 100%;
+    }
+    
+    .exam-card .btn-group .btn {
+        flex: 1;
+    }
+    
+    .search-form .col-md-2 {
+        margin-top: 1rem;
+    }
+}
