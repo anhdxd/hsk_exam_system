@@ -24,3 +24,511 @@ INFO 2025-06-10 17:30:42,720 autoreload 21900 43344 D:\anhdxd\hsk_exam_system\ap
 INFO 2025-06-10 17:30:43,175 autoreload 55224 28780 Watching for file changes with StatReloader
 INFO 2025-06-10 17:30:46,817 autoreload 55224 28780 D:\anhdxd\hsk_exam_system\apps\questions\urls.py changed, reloading.
 INFO 2025-06-10 17:30:47,646 autoreload 36704 16812 Watching for file changes with StatReloader
+INFO 2025-06-10 17:31:40,953 basehttp 36704 47972 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-10 17:31:42,562 basehttp 36704 47972 "GET /questions/ HTTP/1.1" 200 42994
+INFO 2025-06-10 17:31:44,130 basehttp 36704 47972 "GET /questions/create/ HTTP/1.1" 200 35704
+INFO 2025-06-10 17:31:46,740 basehttp 36704 47972 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-10 17:59:18,763 autoreload 43384 42376 Watching for file changes with StatReloader
+INFO 2025-06-10 17:59:22,313 basehttp 43384 62800 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-10 18:03:43,478 basehttp 43384 62800 "GET /exams HTTP/1.1" 301 0
+ERROR 2025-06-10 18:03:43,550 log 43384 62920 Internal Server Error: /exams/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 144: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-06-10 18:03:43,552 basehttp 43384 62920 "GET /exams/ HTTP/1.1" 500 196321
+INFO 2025-06-10 18:03:55,906 autoreload 43384 42376 D:\anhdxd\hsk_exam_system\config\urls.py changed, reloading.
+INFO 2025-06-10 18:03:56,385 autoreload 30700 39928 Watching for file changes with StatReloader
+ERROR 2025-06-10 18:04:03,240 log 30700 24408 Internal Server Error: /exams/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 144: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-06-10 18:04:03,242 basehttp 30700 24408 "GET /exams/ HTTP/1.1" 500 196321
+ERROR 2025-06-10 18:05:35,416 log 30700 24408 Internal Server Error: /exams/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sessions' not found. 'sessions' is not a valid view function or pattern name.
+ERROR 2025-06-10 18:05:35,420 basehttp 30700 24408 "GET /exams/ HTTP/1.1" 500 198605
+INFO 2025-06-10 18:06:13,757 basehttp 30700 24408 "GET /exams/ HTTP/1.1" 200 12440
+INFO 2025-06-10 18:06:17,716 basehttp 30700 24408 "GET /exams/2/delete/ HTTP/1.1" 200 15704
+INFO 2025-06-10 18:06:19,707 basehttp 30700 24408 "GET /exams/2/edit/ HTTP/1.1" 200 20266
+INFO 2025-06-10 18:06:24,041 basehttp 30700 24408 "GET /exams/2/ HTTP/1.1" 200 12262
+INFO 2025-06-10 18:07:03,316 basehttp 30700 24408 "GET /exams/2/ HTTP/1.1" 200 12262
+INFO 2025-06-10 18:07:42,706 basehttp 30700 24408 "GET /exams/2/start/ HTTP/1.1" 200 17843
+INFO 2025-06-10 18:08:02,278 autoreload 30700 39928 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-10 18:08:02,864 autoreload 47752 37688 Watching for file changes with StatReloader
+INFO 2025-06-10 18:08:09,353 autoreload 47752 37688 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-10 18:08:09,805 autoreload 8908 38128 Watching for file changes with StatReloader
+INFO 2025-06-10 18:15:16,022 autoreload 14736 63320 Watching for file changes with StatReloader
+INFO 2025-06-10 18:15:41,043 autoreload 14736 63320 D:\anhdxd\hsk_exam_system\apps\exams\admin.py changed, reloading.
+INFO 2025-06-10 18:15:41,471 autoreload 42100 21792 Watching for file changes with StatReloader
+INFO 2025-06-10 18:15:48,170 autoreload 42100 21792 D:\anhdxd\hsk_exam_system\apps\exams\forms.py changed, reloading.
+INFO 2025-06-10 18:15:48,600 autoreload 54928 44136 Watching for file changes with StatReloader
+INFO 2025-06-10 18:15:52,168 autoreload 54928 44136 D:\anhdxd\hsk_exam_system\apps\exams\forms.py changed, reloading.
+INFO 2025-06-10 18:15:52,616 autoreload 15336 31260 Watching for file changes with StatReloader
+INFO 2025-06-10 18:16:01,585 autoreload 48152 20612 Watching for file changes with StatReloader
+INFO 2025-06-10 18:16:02,650 basehttp 48152 9264 "GET /exams/2/start/ HTTP/1.1" 200 17847
+INFO 2025-06-10 18:16:04,352 basehttp 48152 9264 "GET /exams/2/start/ HTTP/1.1" 200 17847
+INFO 2025-06-10 18:16:08,046 basehttp 48152 9264 "GET /exams/ HTTP/1.1" 200 12440
+INFO 2025-06-10 18:16:09,442 basehttp 48152 9264 "GET /exams/2/ HTTP/1.1" 200 12262
+INFO 2025-06-10 18:16:11,027 basehttp 48152 9264 "GET /exams/2/start/ HTTP/1.1" 200 17847
+INFO 2025-06-11 08:50:40,744 autoreload 41268 13776 Watching for file changes with StatReloader
+INFO 2025-06-11 08:50:55,173 basehttp 41268 34080 "GET /exams/2/start/ HTTP/1.1" 200 17847
+INFO 2025-06-11 08:50:55,218 basehttp 41268 34080 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-06-11 08:50:55,219 basehttp 41268 52080 "GET /static/js/main.js HTTP/1.1" 304 0
+INFO 2025-06-11 08:53:34,547 basehttp 41268 52080 "GET /exams/2/start/ HTTP/1.1" 200 17973
+INFO 2025-06-11 08:53:47,410 basehttp 41268 52080 "POST /exams/2/start/ HTTP/1.1" 302 0
+INFO 2025-06-11 08:53:47,438 basehttp 41268 52080 "GET /exams/session/1/take/ HTTP/1.1" 200 27655
+INFO 2025-06-11 08:54:10,910 basehttp 41268 52080 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:54:18,735 basehttp 41268 52080 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:54:47,530 basehttp 41268 52080 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:54:47,530 basehttp 41268 34080 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 08:55:17,521 basehttp 41268 34080 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:55:47,937 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:55:47,937 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 08:56:17,938 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:56:47,942 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 08:57:23,933 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:57:47,942 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 08:58:23,940 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 08:58:47,947 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 08:59:23,959 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:00:00,999 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:00:01,001 basehttp 41268 11072 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:00:09,106 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 27626
+INFO 2025-06-11 09:00:21,095 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:00:21,114 basehttp 41268 42544 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:00:21,133 basehttp 41268 42544 "GET /exams/session/1/take/ HTTP/1.1" 200 27925
+INFO 2025-06-11 09:00:28,970 basehttp 41268 42544 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:00:28,988 basehttp 41268 42544 "GET /exams/session/1/take/ HTTP/1.1" 200 27876
+INFO 2025-06-11 09:00:34,392 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:00:39,572 basehttp 41268 42544 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:00:39,590 basehttp 41268 42544 "GET /exams/session/1/take/ HTTP/1.1" 200 27634
+INFO 2025-06-11 09:01:09,649 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:01:39,653 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:01:39,654 basehttp 41268 11072 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:02:09,667 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:02:39,655 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:02:39,655 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:03:09,644 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:03:39,658 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:03:39,659 basehttp 41268 11072 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:04:09,651 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:04:28,564 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28211
+INFO 2025-06-11 09:04:31,465 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:31,480 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28462
+INFO 2025-06-11 09:04:33,260 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:33,283 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28211
+INFO 2025-06-11 09:04:34,815 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:34,831 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28502
+INFO 2025-06-11 09:04:38,147 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:38,163 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28502
+INFO 2025-06-11 09:04:40,489 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:40,506 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28502
+INFO 2025-06-11 09:04:45,622 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:45,638 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28502
+INFO 2025-06-11 09:04:48,749 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:04:48,765 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28462
+INFO 2025-06-11 09:05:00,650 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:05:00,666 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28211
+INFO 2025-06-11 09:05:02,711 basehttp 41268 11072 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:05:02,727 basehttp 41268 11072 "GET /exams/session/1/take/ HTTP/1.1" 200 28462
+INFO 2025-06-11 09:05:32,774 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:06:02,783 basehttp 41268 11072 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:06:02,783 basehttp 41268 42544 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:06:32,782 basehttp 41268 42544 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:06:40,259 basehttp 41268 42544 "POST /exams/session/1/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:06:40,276 basehttp 41268 42544 "GET /exams/session/1/take/ HTTP/1.1" 200 28211
+INFO 2025-06-11 09:07:09,608 autoreload 41268 13776 D:\anhdxd\hsk_exam_system\apps\exams\views.py changed, reloading.
+INFO 2025-06-11 09:07:10,084 autoreload 41880 45188 Watching for file changes with StatReloader
+INFO 2025-06-11 09:07:10,341 basehttp 41880 9672 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:07:30,472 autoreload 41880 45188 D:\anhdxd\hsk_exam_system\apps\exams\urls.py changed, reloading.
+INFO 2025-06-11 09:07:30,956 autoreload 44280 27240 Watching for file changes with StatReloader
+INFO 2025-06-11 09:07:40,329 basehttp 44280 31356 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:07:40,329 basehttp 44280 17020 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:07:45,159 autoreload 44280 27240 D:\anhdxd\hsk_exam_system\apps\exams\views.py changed, reloading.
+INFO 2025-06-11 09:07:45,675 autoreload 32548 46796 Watching for file changes with StatReloader
+INFO 2025-06-11 09:08:10,946 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:08:40,948 basehttp 32548 28796 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:08:40,951 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:09:10,961 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:09:40,945 basehttp 32548 58916 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:10:23,946 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:10:40,957 basehttp 32548 58916 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:10:48,023 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:11:10,334 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:11:40,338 basehttp 32548 58916 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:11:40,339 basehttp 32548 28796 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:12:10,945 basehttp 32548 28796 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:12:40,351 basehttp 32548 28796 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:12:40,366 basehttp 32548 58916 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:25:50,754 autoreload 9892 61916 Watching for file changes with StatReloader
+INFO 2025-06-11 09:25:56,562 basehttp 9892 16964 "GET /exams/session/1/time-check/ HTTP/1.1" 200 40
+INFO 2025-06-11 09:25:56,563 basehttp 9892 4588 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:25:57,876 basehttp 9892 4588 "GET /exams/session/1/take/ HTTP/1.1" 200 35490
+INFO 2025-06-11 09:26:03,592 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 530
+INFO 2025-06-11 09:26:06,042 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 557
+INFO 2025-06-11 09:26:06,761 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 530
+INFO 2025-06-11 09:26:08,177 basehttp 9892 4588 "POST /exams/session/1/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:26:09,048 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 557
+INFO 2025-06-11 09:26:09,871 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 530
+INFO 2025-06-11 09:26:10,537 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 557
+INFO 2025-06-11 09:26:11,392 basehttp 9892 4588 "POST /exams/session/1/navigate/ HTTP/1.1" 200 530
+INFO 2025-06-11 09:26:11,454 basehttp 9892 4588 "POST /exams/session/1/complete/ HTTP/1.1" 200 136
+INFO 2025-06-11 09:26:11,563 basehttp 9892 4588 "GET /exams/session/1/result/ HTTP/1.1" 200 24043
+INFO 2025-06-11 09:26:58,310 autoreload 9892 61916 D:\anhdxd\hsk_exam_system\apps\exams\urls.py changed, reloading.
+INFO 2025-06-11 09:26:58,795 autoreload 46352 55440 Watching for file changes with StatReloader
+INFO 2025-06-11 09:27:27,035 basehttp 46352 59956 "GET /exams/ HTTP/1.1" 200 14525
+INFO 2025-06-11 09:27:31,464 basehttp 46352 59956 "GET /exams/2/ HTTP/1.1" 200 15113
+INFO 2025-06-11 09:27:36,046 basehttp 46352 59956 "GET /exams/2/ HTTP/1.1" 200 15113
+INFO 2025-06-11 09:32:30,407 basehttp 46352 59956 "GET /exams/2/ HTTP/1.1" 200 15113
+INFO 2025-06-11 09:32:31,613 basehttp 46352 59956 "GET /exams/2/start/ HTTP/1.1" 200 17973
+INFO 2025-06-11 09:32:38,115 basehttp 46352 59956 "POST /exams/2/start/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:32:38,134 basehttp 46352 59956 "GET /exams/session/2/take/ HTTP/1.1" 200 35777
+INFO 2025-06-11 09:32:43,374 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:44,898 basehttp 46352 59956 "POST /exams/session/2/navigate/ HTTP/1.1" 200 559
+INFO 2025-06-11 09:32:46,275 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:49,855 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:50,305 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:50,305 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:50,858 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,204 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,205 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,723 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,724 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,897 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:51,898 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:52,251 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:52,528 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:52,995 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:53,791 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:54,030 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:54,366 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:54,374 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:54,692 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:54,968 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:55,336 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:55,337 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:55,599 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:56,503 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:56,504 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:56,848 basehttp 46352 59956 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:56,849 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:57,032 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:57,747 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:58,891 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,041 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,202 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,364 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,508 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,658 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,786 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:32:59,932 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:33:00,086 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:33:00,387 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:33:00,530 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:33:00,658 basehttp 46352 31604 "POST /exams/session/2/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:33:01,384 basehttp 46352 31604 "POST /exams/session/2/complete/ HTTP/1.1" 200 136
+INFO 2025-06-11 09:33:01,427 basehttp 46352 31604 "GET /exams/session/2/result/ HTTP/1.1" 200 24427
+INFO 2025-06-11 09:34:52,945 autoreload 46352 55440 D:\anhdxd\hsk_exam_system\apps\exams\views.py changed, reloading.
+INFO 2025-06-11 09:34:53,445 autoreload 26312 15456 Watching for file changes with StatReloader
+INFO 2025-06-11 09:40:39,263 autoreload 46932 58808 Watching for file changes with StatReloader
+INFO 2025-06-11 09:40:50,286 basehttp 46932 24620 "GET /exams/session/2/result/ HTTP/1.1" 200 24423
+INFO 2025-06-11 09:40:55,712 basehttp 46932 24620 "GET /exams/session/2/result/ HTTP/1.1" 200 24423
+INFO 2025-06-11 09:40:56,347 basehttp 46932 24620 "GET /exams/session/2/result/ HTTP/1.1" 200 24423
+INFO 2025-06-11 09:40:57,099 basehttp 46932 24620 "GET /exams/session/2/result/ HTTP/1.1" 200 24423
+INFO 2025-06-11 09:41:20,363 basehttp 46932 24620 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-11 09:41:29,158 basehttp 46932 24620 "GET /exams/ HTTP/1.1" 200 15623
+INFO 2025-06-11 09:41:30,406 basehttp 46932 24620 "GET /exams/2/ HTTP/1.1" 200 16538
+INFO 2025-06-11 09:41:31,292 basehttp 46932 24620 "GET /exams/2/start/ HTTP/1.1" 200 17973
+INFO 2025-06-11 09:41:34,252 basehttp 46932 24620 "POST /exams/2/start/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:41:34,271 basehttp 46932 24620 "GET /exams/session/3/take/ HTTP/1.1" 200 35777
+INFO 2025-06-11 09:41:38,653 basehttp 46932 24620 "POST /exams/session/3/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:41:38,655 basehttp 46932 52740 "POST /exams/session/3/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:41:39,477 basehttp 46932 52740 "POST /exams/session/3/navigate/ HTTP/1.1" 200 559
+INFO 2025-06-11 09:41:40,103 basehttp 46932 52740 "POST /exams/session/3/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:41:42,800 basehttp 46932 52740 "POST /exams/session/3/complete/ HTTP/1.1" 200 136
+INFO 2025-06-11 09:41:42,840 basehttp 46932 52740 "GET /exams/session/3/result/ HTTP/1.1" 200 24318
+INFO 2025-06-11 09:43:30,386 autoreload 46932 58808 D:\anhdxd\hsk_exam_system\apps\exams\views.py changed, reloading.
+INFO 2025-06-11 09:43:30,872 autoreload 29476 3160 Watching for file changes with StatReloader
+INFO 2025-06-11 09:48:21,621 autoreload 61824 44872 Watching for file changes with StatReloader
+INFO 2025-06-11 09:48:29,436 basehttp 61824 24428 "GET /exams/session/3/result/ HTTP/1.1" 200 24318
+INFO 2025-06-11 09:48:37,227 basehttp 61824 24428 "GET /exams/session/3/take/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:48:37,871 basehttp 61824 24428 "GET /exams/2/start/ HTTP/1.1" 200 17973
+INFO 2025-06-11 09:48:42,992 basehttp 61824 24428 "POST /exams/2/start/ HTTP/1.1" 200 18216
+INFO 2025-06-11 09:48:54,647 basehttp 61824 24428 "POST /exams/2/start/ HTTP/1.1" 200 18216
+INFO 2025-06-11 09:48:59,539 basehttp 61824 24428 "GET /exams/2/start/ HTTP/1.1" 200 17973
+INFO 2025-06-11 09:49:02,200 basehttp 61824 24428 "GET /exams/ HTTP/1.1" 200 16888
+INFO 2025-06-11 09:49:05,163 basehttp 61824 24428 "GET /exams/2/ HTTP/1.1" 200 18420
+INFO 2025-06-11 09:49:10,925 basehttp 61824 24428 "GET /exams/1/ HTTP/1.1" 200 12269
+INFO 2025-06-11 09:49:11,776 basehttp 61824 24428 "GET /exams/1/start/ HTTP/1.1" 200 17980
+INFO 2025-06-11 09:49:15,144 basehttp 61824 24428 "POST /exams/1/start/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:49:15,164 basehttp 61824 24428 "GET /exams/session/4/take/ HTTP/1.1" 200 35764
+INFO 2025-06-11 09:49:16,283 basehttp 61824 24428 "POST /exams/session/4/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:49:16,284 basehttp 61824 3736 "POST /exams/session/4/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:49:17,648 basehttp 61824 3736 "POST /exams/session/4/navigate/ HTTP/1.1" 200 524
+INFO 2025-06-11 09:49:20,653 basehttp 61824 3736 "POST /exams/session/4/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:49:22,603 basehttp 61824 3736 "POST /exams/session/4/navigate/ HTTP/1.1" 200 528
+INFO 2025-06-11 09:49:23,624 basehttp 61824 24428 "POST /exams/session/4/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:49:23,625 basehttp 61824 3736 "POST /exams/session/4/save-answer/ HTTP/1.1" 200 84
+INFO 2025-06-11 09:49:24,758 basehttp 61824 3736 "POST /exams/session/4/complete/ HTTP/1.1" 200 136
+INFO 2025-06-11 09:49:24,804 basehttp 61824 3736 "GET /exams/session/4/result/ HTTP/1.1" 200 26862
+INFO 2025-06-11 09:49:43,811 basehttp 61824 3736 "GET /exams/1/start/ HTTP/1.1" 200 17980
+INFO 2025-06-11 09:49:48,704 basehttp 61824 3736 "GET /exams/1/ HTTP/1.1" 200 15464
+ERROR 2025-06-11 09:49:55,786 log 61824 3736 Internal Server Error: /exams/sessions/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: exams/session_list.html, exams/examsession_list.html
+ERROR 2025-06-11 09:49:55,787 basehttp 61824 3736 "GET /exams/sessions/?exam=1 HTTP/1.1" 500 90810
+INFO 2025-06-11 09:49:58,973 basehttp 61824 3736 "GET /exams/1/edit/ HTTP/1.1" 200 20799
+INFO 2025-06-11 09:50:07,987 basehttp 61824 3736 "POST /exams/1/edit/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:50:08,004 basehttp 61824 3736 "GET /exams/1/ HTTP/1.1" 200 15896
+INFO 2025-06-11 09:50:16,104 basehttp 61824 3736 "GET /exams/session/4/result/ HTTP/1.1" 200 26677
+INFO 2025-06-11 09:50:22,490 basehttp 61824 3736 "GET /exams/1/ HTTP/1.1" 200 15564
+INFO 2025-06-11 09:50:23,960 basehttp 61824 3736 "GET /exams/1/edit/ HTTP/1.1" 200 20801
+INFO 2025-06-11 09:50:46,004 basehttp 61824 3736 "POST /exams/1/edit/ HTTP/1.1" 302 0
+INFO 2025-06-11 09:50:46,023 basehttp 61824 3736 "GET /exams/1/ HTTP/1.1" 200 15897
+INFO 2025-06-11 09:50:52,156 basehttp 61824 3736 "GET /exams/ HTTP/1.1" 200 18155
+INFO 2025-06-11 09:50:55,800 basehttp 61824 3736 "GET /exams/session/3/result/ HTTP/1.1" 200 24318
+INFO 2025-06-11 09:50:59,850 basehttp 61824 3736 "GET /exams/1/ HTTP/1.1" 200 15565
+INFO 2025-06-11 09:51:10,039 basehttp 61824 3736 "GET /exams/1/edit/ HTTP/1.1" 200 20802
+INFO 2025-06-11 09:52:49,706 autoreload 47872 41904 Watching for file changes with StatReloader
+INFO 2025-06-11 09:53:03,567 basehttp 47872 15692 "GET /exams/1/ HTTP/1.1" 200 15565
+INFO 2025-06-11 09:53:05,005 basehttp 47872 15692 "GET /exams/1/ HTTP/1.1" 200 15565
+INFO 2025-06-11 09:53:06,208 basehttp 47872 15692 "GET /exams/1/ HTTP/1.1" 200 15565
+INFO 2025-06-11 09:53:22,362 autoreload 47872 41904 D:\anhdxd\hsk_exam_system\apps\exams\views.py changed, reloading.
+INFO 2025-06-11 09:53:22,879 autoreload 52496 33428 Watching for file changes with StatReloader
+INFO 2025-06-11 09:57:59,267 basehttp 52496 38176 "GET /exams/1/edit/ HTTP/1.1" 200 20802
+INFO 2025-06-11 10:00:09,581 autoreload 52496 33428 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-11 10:00:10,029 autoreload 59116 552 Watching for file changes with StatReloader
+INFO 2025-06-11 10:00:22,674 autoreload 59116 552 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-11 10:00:23,092 autoreload 11608 14388 Watching for file changes with StatReloader
+INFO 2025-06-11 10:00:35,763 autoreload 11608 14388 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-11 10:00:36,240 autoreload 13540 53024 Watching for file changes with StatReloader
+INFO 2025-06-11 10:00:39,868 autoreload 13540 53024 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-11 10:00:40,311 autoreload 36544 22504 Watching for file changes with StatReloader
+INFO 2025-06-11 10:00:42,898 autoreload 36544 22504 D:\anhdxd\hsk_exam_system\apps\exams\models.py changed, reloading.
+INFO 2025-06-11 10:00:43,379 autoreload 37384 53012 Watching for file changes with StatReloader

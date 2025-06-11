@@ -1,0 +1,592 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kết quả thi - {{ exam.title }}{% endblock %}
+
+{% block extra_css %}
+<style>    .result-header {
+        background: linear-gradient(135deg, {% if session.passed %}#28a745 0%, #20c997 100%{% else %}#dc3545 0%, #fd7e14 100%{% endif %});
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .result-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .score-circle {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        margin: 0 auto 2rem;        background: {% if session.passed %}linear-gradient(135deg, #28a745 0%, #20c997 100%){% else %}linear-gradient(135deg, #dc3545 0%, #fd7e14 100%){% endif %};
+        position: relative;
+        box-shadow: 0 8px 25px {% if session.passed %}rgba(40, 167, 69, 0.3){% else %}rgba(220, 53, 69, 0.3){% endif %};
+    }
+
+    .score-circle::before {
+        content: '';
+        position: absolute;
+        inset: -5px;
+        border-radius: 50%;        background: linear-gradient(45deg, transparent, {% if session.passed %}#28a745{% else %}#dc3545{% endif %}, transparent);
+    z-index: -1;
+    animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }    .result-status {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: {% if session.passed %}#28a745{% else %}#dc3545{% endif %};
+    }
+
+    .result-details {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .detail-value {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid #e9ecef;
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #667eea;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .question-review {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .question-item {
+        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+
+    .question-item:last-child {
+        border-bottom: none;
+    }
+
+    .question-number {
+        background: #667eea;
+        color: white;
+        border-radius: 50px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+
+    .question-text {
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #343a40;
+    }
+
+    .answer-choice {
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 0;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+    }
+
+    .answer-choice.correct {
+        background: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .answer-choice.incorrect {
+        background: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .answer-choice.user-selected {
+        font-weight: bold;
+    }
+
+    .answer-choice.not-selected {
+        background: #f8f9fa;
+        color: #6c757d;
+    }
+
+    .action-buttons {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .btn-action {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-retake {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+    }
+
+    .btn-retake:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+        border: none;
+    }
+
+    .btn-back:hover {
+        background: #5a6268;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .completion-message {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        border-left: 4px solid #667eea;
+        padding: 1.5rem;
+        border-radius: 0 10px 10px 0;
+        margin: 2rem 0;
+    }
+
+    .performance-indicator {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin: 0.25rem;
+    }
+
+    .performance-excellent {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .performance-good {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .performance-average {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .performance-poor {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .certificate-section {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        color: #2d3436;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .certificate-icon {
+        font-size: 4rem;
+        color: #fdcb6e;
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            font-size: 1.5rem;
+        }
+
+        .result-status {
+            font-size: 1.5rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="result-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-3">
+                    {% if session.passed %}
+                    <i class="fas fa-trophy"></i> Chúc mừng!
+                    {% else %}
+                    <i class="fas fa-redo"></i> Cần cải thiện
+                    {% endif %}
+                </h1>
+                <h2 class="mb-3">{{ exam.title }}</h2>
+                <p class="lead mb-0">
+                    {% if session.passed %}
+                    Bạn đã vượt qua kỳ thi thành công!
+                    {% else %}
+                    Đừng nản lòng, hãy cố gắng lần sau!
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-4 text-md-right">
+                <div class="text-light">
+                    <h4>{{ exam.hsk_level.name }}</h4>
+                    <p class="mb-0">{{ session.completed_at|date:"d/m/Y H:i" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Main Results -->
+        <div class="col-lg-8">
+            <!-- Score Display -->
+            <div class="result-card">
+                <div class="score-circle">
+                    {{ session.percentage|floatformat:1 }}%
+                </div>
+
+                <div class="result-status">
+                    {% if session.passed %}
+                    <i class="fas fa-check-circle"></i> ĐẬU
+                    {% else %}
+                    <i class="fas fa-times-circle"></i> RỚT
+                    {% endif %}
+                </div>
+                <p class="text-muted mb-3">
+                    Bạn đã trả lời đúng {{ session.earned_points }}/{{ session.total_points }} điểm
+                    ({{ session.questions_order|length }} câu hỏi)
+                </p>
+
+                <!-- Performance Indicator -->
+                {% if session.percentage >= 90 %}
+                <span class="performance-indicator performance-excellent">
+                    <i class="fas fa-star"></i> Xuất sắc
+                </span>
+                {% elif session.percentage >= 80 %}
+                <span class="performance-indicator performance-good">
+                    <i class="fas fa-thumbs-up"></i> Tốt
+                </span>
+                {% elif session.percentage >= 60 %}
+                <span class="performance-indicator performance-average">
+                    <i class="fas fa-check"></i> Trung bình
+                </span>
+                {% else %}
+                <span class="performance-indicator performance-poor">
+                    <i class="fas fa-arrow-up"></i> Cần cải thiện
+                </span>
+                {% endif %}
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">
+                            <i class="fas fa-question-circle"></i> Tổng số câu
+                        </span>
+                        <span class="detail-value">{{ total_questions }}</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">
+                            <i class="fas fa-check"></i> Câu đúng
+                        </span>
+                        <span class="detail-value text-success">{{ correct_answers }}</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">
+                            <i class="fas fa-times"></i> Câu sai
+                        </span>
+                        <span class="detail-value text-danger">{{ incorrect_answers }}</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">
+                            <i class="fas fa-clock"></i> Thời gian làm bài
+                        </span>
+                        <span class="detail-value">{{ time_taken_display }}</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">
+                            <i class="fas fa-percent"></i> Điểm cần đạt
+                        </span>
+                        <span class="detail-value">{{ exam.passing_score }}%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Section -->
+            {% if session.passed %}
+            <div class="certificate-section">
+                <div class="certificate-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h4>Chứng chỉ hoàn thành</h4>
+                <p>Bạn đã hoàn thành thành công kỳ thi {{ exam.title }}</p>
+                <button class="btn btn-dark">
+                    <i class="fas fa-download"></i> Tải chứng chỉ
+                </button>
+            </div>
+            {% endif %}
+
+            <!-- Detailed Review -->
+            {% if show_detailed_results and questions_with_answers %}
+            <div class="question-review">
+                <div class="p-3 bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-list"></i> Chi tiết câu trả lời
+                    </h5>
+                </div>
+
+                {% for item in questions_with_answers %}
+                <div class="question-item">
+                    <div class="question-number">
+                        Câu {{ forloop.counter }}
+                    </div>
+
+                    <div class="question-text">
+                        {{ item.question.question_text|truncatewords:20 }}
+                    </div> {% for choice in item.question.choices.all %}
+                    <div class="answer-choice 
+                        {% if choice.is_correct %}correct{% endif %}
+                        {% if item.user_choice and choice.pk == item.user_choice.pk %}user-selected{% endif %}
+                        {% if item.user_choice and choice.pk == item.user_choice.pk and not choice.is_correct %}incorrect{% endif %}
+                        {% if not item.user_choice or choice.pk != item.user_choice.pk %}{% if not choice.is_correct %}not-selected{% endif %}{% endif %}
+                    ">
+                        {% if item.user_choice and choice.pk == item.user_choice.pk %}
+                        <i class="fas fa-arrow-right"></i>
+                        {% endif %}
+
+                        {{ choice.choice_text }}
+
+                        {% if choice.is_correct %}
+                        <i class="fas fa-check-circle text-success float-right"></i>
+                        {% elif item.user_choice and choice.pk == item.user_choice.pk and not choice.is_correct %}
+                        <i class="fas fa-times-circle text-danger float-right"></i>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    {% if item.question.explanation %}
+                    <div class="mt-2 p-2 bg-light rounded">
+                        <small><strong>Giải thích:</strong> {{ item.question.explanation }}</small>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">{{ session.percentage|floatformat:1 }}%</span>
+                    <div class="stat-label">Điểm số</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">{{ correct_answers }}</span>
+                    <div class="stat-label">Câu đúng</div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">{{ time_taken_minutes }}p</span>
+                    <div class="stat-label">Thời gian</div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">
+                        {% if session.passed %}
+                        <i class="fas fa-check text-success"></i>
+                        {% else %}
+                        <i class="fas fa-times text-danger"></i>
+                        {% endif %}
+                    </span>
+                    <div class="stat-label">Kết quả</div>
+                </div>
+            </div>
+
+            <!-- Completion Message -->
+            <div class="completion-message">
+                <h6><i class="fas fa-info-circle"></i> Lời khuyên</h6>
+                {% if session.passed %}
+                <p class="mb-0">
+                    Xuất sắc! Bạn đã thể hiện khả năng tiếng Trung rất tốt ở cấp độ {{ exam.hsk_level.name }}.
+                    Hãy tiếp tục luyện tập để nâng cao trình độ.
+                </p>
+                {% else %}
+                <p class="mb-0">
+                    Đừng nản lòng! Hãy ôn tập thêm các kỹ năng cần thiết và thử lại.
+                    Mỗi lần thử đều là một cơ hội học hỏi.
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                {% if can_retake and not session.passed %}
+                <a href="{% url 'exams:start' exam.pk %}" class="btn btn-action btn-retake">
+                    <i class="fas fa-redo"></i> Thi lại
+                </a>
+                {% endif %}
+
+                <a href="{% url 'exams:detail' exam.pk %}" class="btn btn-action btn-back">
+                    <i class="fas fa-arrow-left"></i> Về trang kỳ thi
+                </a>
+
+                <a href="{% url 'exams:list' %}" class="btn btn-action btn-back">
+                    <i class="fas fa-list"></i> Danh sách kỳ thi
+                </a>
+            </div>
+
+            <!-- Share Results -->
+            <div class="mt-4 text-center">
+                <h6>Chia sẻ kết quả</h6>
+                <button class="btn btn-outline-primary btn-sm mr-2" onclick="shareOnFacebook()">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="btn btn-outline-info btn-sm" onclick="shareOnTwitter()">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+        // Animate score circle
+        animateScore();
+
+        // Smooth scroll to detailed results
+        if (window.location.hash === '#detailed') {
+            $('html, body').animate({
+                scrollTop: $('.question-review').offset().top - 100
+            }, 1000);
+        }
+    });
+
+    function animateScore() {
+        const scoreElement = $('.score-circle');
+        const targetScore = {{ session.percentage| floatformat: 1
+    }};
+    let currentScore = 0;
+    const increment = targetScore / 50;
+
+    const timer = setInterval(function () {
+        currentScore += increment;
+        if (currentScore >= targetScore) {
+            currentScore = targetScore;
+            clearInterval(timer);
+        }
+        scoreElement.text(currentScore.toFixed(1) + '%');
+    }, 30);
+}
+
+    function shareOnFacebook() {
+        const text = `Tôi vừa hoàn thành kỳ thi ${encodeURIComponent('{{ exam.title }}')} với điểm số {{ session.percentage|floatformat:1 }}%!`;
+        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${text}`;
+        window.open(url, '_blank', 'width=600,height=400');
+    }
+
+    function shareOnTwitter() {
+        const text = `Tôi vừa hoàn thành kỳ thi ${encodeURIComponent('{{ exam.title }}')} với điểm số {{ session.percentage|floatformat:1 }}%! #HSK #TiếngTrung`;
+        const url = `https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.href)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+    }
+
+    // Prevent back navigation after exam completion
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, null, window.location.href);
+    };
+</script>
+{% endblock %}

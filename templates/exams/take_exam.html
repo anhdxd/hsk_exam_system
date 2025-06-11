@@ -1,0 +1,962 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Đang thi - {{ exam.title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #f8f9fa;
+    }
+    
+    .exam-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .timer-container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        backdrop-filter: blur(10px);
+    }
+    
+    .timer {
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+    }
+    
+    .timer.warning {
+        color: #ffc107;
+        animation: pulse 1s infinite;
+    }
+    
+    .timer.danger {
+        color: #dc3545;
+        animation: pulse 0.5s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+    
+    .progress-container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 0.5rem;
+        backdrop-filter: blur(10px);
+    }
+    
+    .progress {
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-bar {
+        background: linear-gradient(90deg, #28a745, #20c997);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+    
+    .question-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin: 2rem 0;
+        min-height: 400px;
+    }
+    
+    .question-header {
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .question-number {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    
+    .question-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #343a40;
+        margin-bottom: 1.5rem;
+    }
+      .question-audio {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+    }
+    
+    .question-passage {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #e8f4f8;
+        border-radius: 8px;
+        border-left: 4px solid #17a2b8;
+    }
+    
+    .passage-content {
+        font-style: italic;
+        line-height: 1.6;
+        color: #495057;
+    }
+    
+    .question-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .choices-container {
+        margin: 2rem 0;
+    }
+    
+    .choice-item {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .choice-item:hover {
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+    
+    .choice-item.selected {
+        border-color: #667eea;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    }
+    
+    .choice-radio {
+        position: absolute;
+        left: -9999px;
+    }
+    
+    .choice-label {
+        display: block;
+        cursor: pointer;
+        padding-left: 2rem;
+        position: relative;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .choice-label::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid #6c757d;
+        border-radius: 50%;
+        background: white;
+        transition: all 0.3s ease;
+    }
+    
+    .choice-radio:checked + .choice-label::before {
+        border-color: #667eea;
+        background: #667eea;
+    }
+    
+    .choice-radio:checked + .choice-label::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+    
+    .navigation-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .btn-navigation {
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .btn-previous {
+        background: #6c757d;
+        color: white;
+        border-color: #6c757d;
+    }
+    
+    .btn-previous:hover {
+        background: #5a6268;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-save {
+        background: #17a2b8;
+        color: white;
+        border-color: #17a2b8;
+    }
+    
+    .btn-save:hover {
+        background: #138496;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-next {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        border: none;
+    }
+    
+    .btn-next:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        color: white;
+    }
+    
+    .btn-complete {
+        background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+        color: white;
+        border: none;
+    }
+    
+    .btn-complete:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        color: white;
+    }
+    
+    .question-info {
+        background: rgba(102, 126, 234, 0.1);
+        border-left: 4px solid #667eea;
+        padding: 1rem;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 1rem;
+    }
+    
+    .auto-save-indicator {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .auto-save-indicator.show {
+        opacity: 1;
+    }
+    
+    .warning-modal .modal-content {
+        border-radius: 15px;
+        border: none;
+    }
+    
+    .warning-modal .modal-header {
+        background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+        color: white;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .exam-sidebar {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+    
+    .sidebar-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .sidebar-item:last-child {
+        border-bottom: none;
+    }
+    
+    @media (max-width: 768px) {
+        .exam-header {
+            padding: 0.5rem 0;
+        }
+        
+        .timer {
+            font-size: 1rem;
+        }
+        
+        .question-container {
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .choice-item {
+            padding: 0.75rem;
+        }
+        
+        .btn-navigation {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Exam Header with Timer and Progress -->
+<div class="exam-header">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h5 class="mb-0">{{ exam.title }}</h5>
+                <small>{{ exam.hsk_level.name }}</small>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="progress-container">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small>Câu {{ question_number }}/{{ total_questions }}</small>
+                        <small>{{ progress_percentage|floatformat:0 }}%</small>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ progress_percentage }}%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="timer-container">
+                    <div class="timer" id="examTimer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timeDisplay">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Question Area -->
+        <div class="col-lg-9">
+            <div class="question-container">
+                <!-- Question Header -->
+                <div class="question-header">
+                    <div class="question-number">
+                        Câu {{ question_number }}
+                    </div>
+                    <div class="question-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small><i class="fas fa-list"></i> Loại: {{ question.question_type.name }}</small>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <small><i class="fas fa-star"></i> Độ khó: {{ question.get_difficulty_display }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question Content -->
+                <div class="question-content">
+                    {% if question.audio_file %}
+                    <div class="question-audio">
+                        <h6><i class="fas fa-volume-up"></i> Audio</h6>
+                        <audio controls preload="metadata" class="w-100">
+                            <source src="{{ question.audio_file.url }}" type="audio/mpeg">
+                            Trình duyệt của bạn không hỗ trợ audio.
+                        </audio>
+                        <small class="text-muted d-block mt-1">
+                            Bạn có thể nghe lại audio nhiều lần
+                        </small>
+                    </div>
+                    {% endif %}
+                      {% if question.passage %}
+                    <div class="question-passage">
+                        <h6><i class="fas fa-book-open"></i> Đoạn văn:</h6>
+                        <div class="passage-content">
+                            {{ question.passage|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="question-text">
+                        {{ question.question_text|linebreaks }}
+                    </div>
+                </div>
+                
+                <!-- Answer Choices -->
+                <form method="post" id="questionForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="next" id="actionInput">
+                    
+                    <div class="choices-container">
+                        {% for choice in form.choice %}
+                            <div class="choice-item" onclick="selectChoice({{ choice.data.value }})">
+                                {{ choice.tag }}
+                                <label for="{{ choice.id_for_label }}" class="choice-label">
+                                    {{ choice.choice_label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+              <!-- Navigation -->
+            <div class="navigation-container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        {% if session.has_previous_question and exam.allow_navigation %}
+                            <button type="button" class="btn btn-navigation btn-previous mr-2" onclick="navigateQuestion('previous')">
+                                <i class="fas fa-arrow-left"></i> Câu trước
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        {% if session.has_next_question %}
+                            <button type="button" class="btn btn-navigation btn-next" onclick="navigateQuestion('next')">
+                                Câu tiếp <i class="fas fa-arrow-right"></i>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-navigation btn-complete" onclick="completeExam()">
+                                <i class="fas fa-check"></i> Nộp bài
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="exam-sidebar">
+                <h6><i class="fas fa-info-circle"></i> Thông tin</h6>
+                
+                <div class="sidebar-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Tổng câu:</span>
+                        <strong>{{ total_questions }}</strong>
+                    </div>
+                </div>
+                
+                <div class="sidebar-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Đã làm:</span>
+                        <strong>{{ question_number }}/{{ total_questions }}</strong>
+                    </div>
+                </div>
+                
+                <div class="sidebar-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Hoàn thành:</span>
+                        <strong>{{ progress_percentage|floatformat:0 }}%</strong>
+                    </div>
+                </div>
+                
+                <div class="sidebar-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Thời gian còn:</span>
+                        <strong id="sidebarTime">--:--</strong>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h6><i class="fas fa-question-circle"></i> Trợ giúp</h6>
+                <ul class="list-unstyled small">
+                    <li><i class="fas fa-save text-primary"></i> Câu trả lời tự động lưu</li>
+                    {% if exam.allow_navigation %}
+                    <li><i class="fas fa-arrows-alt-h text-success"></i> Có thể quay lại câu trước</li>
+                    {% else %}
+                    <li><i class="fas fa-lock text-warning"></i> Không thể quay lại câu trước</li>
+                    {% endif %}
+                    <li><i class="fas fa-clock text-info"></i> Thời gian được tính liên tục</li>
+                </ul>
+                
+                <button type="button" class="btn btn-outline-danger btn-sm btn-block mt-3" onclick="completeExam()">
+                    <i class="fas fa-flag-checkered"></i> Nộp bài sớm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auto-save Indicator -->
+<div class="auto-save-indicator" id="autoSaveIndicator">
+    <i class="fas fa-check"></i> Đã lưu
+</div>
+
+<!-- Complete Exam Modal -->
+<div class="modal fade warning-modal" id="completeExamModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Xác nhận nộp bài
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn nộp bài không?</p>
+                <p class="text-muted">
+                    Sau khi nộp bài, bạn sẽ không thể thay đổi câu trả lời.
+                    <br>Tiến độ hiện tại: <strong>{{ question_number }}/{{ total_questions }}</strong> câu.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Tiếp tục làm bài
+                </button>
+                <button type="button" class="btn btn-danger" onclick="confirmCompleteExam()">
+                    Nộp bài ngay
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let timeRemaining = {{ time_remaining_seconds }};
+let timerInterval;
+let autoSaveTimeout;
+
+$(document).ready(function() {
+    // Start timer
+    startTimer();
+    
+    // Auto-save every 30 seconds
+    setInterval(autoSave, 30000);
+    
+    // Prevent accidental page leave
+    setupPageLeaveWarning();
+    
+    // Initialize choice selection
+    initializeChoices();
+    
+    // Auto-check time with server every minute
+    setInterval(checkTimeWithServer, 60000);
+});
+
+function startTimer() {
+    timerInterval = setInterval(function() {
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        if (timeRemaining <= 0) {
+            timeExpired();
+        } else if (timeRemaining <= 300) { // 5 minutes warning
+            $('#examTimer').addClass('danger');
+        } else if (timeRemaining <= 600) { // 10 minutes warning
+            $('#examTimer').addClass('warning');
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const hours = Math.floor(timeRemaining / 3600);
+    const minutes = Math.floor((timeRemaining % 3600) / 60);
+    const seconds = timeRemaining % 60;
+    
+    let display;
+    if (hours > 0) {
+        display = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    } else {
+        display = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    $('#timeDisplay, #sidebarTime').text(display);
+}
+
+function timeExpired() {
+    clearInterval(timerInterval);
+    alert('Hết thời gian thi! Bài thi sẽ được tự động nộp.');
+    
+    // Disable page leave warning for auto-submit
+    window.removeEventListener('beforeunload', pageLeaveHandler);
+    
+    // Auto-submit the exam
+    $('#actionInput').val('complete');
+    $('#questionForm').submit();
+}
+
+function selectChoice(choiceId) {
+    // Unselect all choices
+    $('.choice-item').removeClass('selected');
+    $('input[name="choice"]').prop('checked', false);
+    
+    // Select the clicked choice
+    $(`input[value="${choiceId}"]`).prop('checked', true);
+    $(`input[value="${choiceId}"]`).closest('.choice-item').addClass('selected');
+    
+    // Auto-save immediately when choice is selected
+    autoSave();
+}
+
+function initializeChoices() {
+    // Mark initially selected choice
+    $('input[name="choice"]:checked').closest('.choice-item').addClass('selected');
+    
+    // Handle radio button changes
+    $('input[name="choice"]').on('change', function() {
+        $('.choice-item').removeClass('selected');
+        $(this).closest('.choice-item').addClass('selected');
+    });
+}
+
+function navigateQuestion(direction) {
+    // Use AJAX to navigate without page reload
+    $.post('{% url "exams:navigate_question_ajax" session.pk %}', {
+        'direction': direction,
+        'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val()
+    })
+    .done(function(response) {
+        if (response.status === 'success') {
+            // Update the question content
+            updateQuestionDisplay(response.question);
+        } else if (response.status === 'completed') {
+            // Exam completed, redirect to results
+            window.location.href = response.redirect_url;
+        } else {
+            alert(response.message || 'Có lỗi xảy ra khi chuyển câu hỏi.');
+        }
+    })
+    .fail(function() {
+        alert('Không thể chuyển câu hỏi. Vui lòng thử lại.');
+    });
+}
+
+function saveAnswer() {
+    const selectedChoice = $('input[name="choice"]:checked').val();
+    
+    if (!selectedChoice) {
+        alert('Vui lòng chọn một đáp án trước khi lưu.');
+        return;
+    }
+    
+    // Temporarily disable page leave warning for save
+    window.removeEventListener('beforeunload', pageLeaveHandler);
+    
+    $('#actionInput').val('save_answer');
+    $('#questionForm').submit();
+}
+
+function autoSave() {
+    const selectedChoice = $('input[name="choice"]:checked').val();
+    
+    if (selectedChoice) {
+        // Use AJAX to save without page refresh
+        $.post('{% url "exams:save_answer_ajax" session.pk %}', {
+            'question_id': getCurrentQuestionId(),
+            'choice_id': selectedChoice,
+            'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val()
+        }).done(function(response) {
+            if (response.status === 'success') {
+                showAutoSaveIndicator();
+            }
+        }).fail(function() {
+            console.log('Auto-save failed');
+        });
+    }
+}
+
+// Global variable to store current question ID
+let currentQuestionId = {{ question.id }};
+
+function getCurrentQuestionId() {
+    return currentQuestionId;
+}
+
+function setCurrentQuestionId(questionId) {
+    currentQuestionId = questionId;
+}
+
+function showAutoSaveIndicator() {
+    $('#autoSaveIndicator').addClass('show');
+    setTimeout(function() {
+        $('#autoSaveIndicator').removeClass('show');
+    }, 2000);
+}
+
+function updateQuestionDisplay(questionData) {
+    // Update current question ID
+    setCurrentQuestionId(questionData.id);
+    
+    // Update question number and progress
+    $('.question-number').text(`Câu ${questionData.question_number}`);
+    
+    // Update header progress
+    $('.exam-header .progress-container small:first').text(`Câu ${questionData.question_number}/${questionData.total_questions}`);
+    $('.exam-header .progress-container small:last').text(`${Math.round(questionData.progress_percentage)}%`);
+    $('.progress-bar').css('width', `${questionData.progress_percentage}%`);
+    
+    // Update sidebar progress
+    $('.sidebar-item:nth-child(2) .d-flex strong').text(`${questionData.question_number}/${questionData.total_questions}`);
+    $('.sidebar-item:nth-child(3) .d-flex strong').text(`${Math.round(questionData.progress_percentage)}%`);
+    
+    // Update question info
+    $('.question-info .row .col-md-6:first-child small').html(`<i class="fas fa-list"></i> Loại: ${questionData.type}`);
+    $('.question-info .row .col-md-6:last-child small').html(`<i class="fas fa-star"></i> Độ khó: ${questionData.difficulty}`);
+    
+    // Update audio if present
+    const audioContainer = $('.question-audio');
+    if (questionData.audio_url) {
+        if (audioContainer.length === 0) {
+            $('.question-content').prepend(`
+                <div class="question-audio">
+                    <h6><i class="fas fa-volume-up"></i> Audio</h6>
+                    <audio controls preload="metadata" class="w-100">
+                        <source src="${questionData.audio_url}" type="audio/mpeg">
+                        Trình duyệt của bạn không hỗ trợ audio.
+                    </audio>
+                    <small class="text-muted d-block mt-1">
+                        Bạn có thể nghe lại audio nhiều lần
+                    </small>
+                </div>
+            `);
+        } else {
+            audioContainer.find('audio source').attr('src', questionData.audio_url);
+            audioContainer.find('audio')[0].load();
+        }
+    } else {
+        audioContainer.remove();
+    }
+    
+    // Update passage if present
+    const passageContainer = $('.question-passage');
+    if (questionData.passage) {
+        if (passageContainer.length === 0) {
+            $('.question-audio').length > 0 
+                ? $('.question-audio').after(`
+                    <div class="question-passage">
+                        <h6><i class="fas fa-book-open"></i> Đoạn văn:</h6>
+                        <div class="passage-content">
+                            ${questionData.passage}
+                        </div>
+                    </div>
+                `)
+                : $('.question-content').prepend(`
+                    <div class="question-passage">
+                        <h6><i class="fas fa-book-open"></i> Đoạn văn:</h6>
+                        <div class="passage-content">
+                            ${questionData.passage}
+                        </div>
+                    </div>
+                `);
+        } else {
+            passageContainer.find('.passage-content').html(questionData.passage);
+        }
+    } else {
+        passageContainer.remove();
+    }
+    
+    // Update question text
+    $('.question-text').html(questionData.text);
+    
+    // Update choices
+    updateChoices(questionData.choices);
+    
+    // Update navigation buttons
+    updateNavigationButtons(questionData);
+}
+
+function updateChoices(choices) {
+    const choicesContainer = $('.choices-container');
+    choicesContainer.empty();
+    
+    choices.forEach((choice, index) => {
+        const isSelected = choice.is_selected;
+        const choiceHtml = `
+            <div class="choice-item ${isSelected ? 'selected' : ''}" onclick="selectChoice(${choice.id})">
+                <input type="radio" name="choice" value="${choice.id}" id="choice_${choice.id}" 
+                       ${isSelected ? 'checked' : ''} style="margin-right: 10px;">
+                <label for="choice_${choice.id}" class="choice-label">
+                    ${choice.text}
+                </label>
+            </div>
+        `;
+        choicesContainer.append(choiceHtml);
+    });
+}
+
+function updateProgress(progressData) {
+    // Update header progress
+    const headerProgress = $('.exam-header .progress-container');
+    headerProgress.find('small:first').text(`Câu ${progressData.current}/${progressData.total}`);
+    headerProgress.find('small:last').text(`${Math.round(progressData.percentage)}%`);
+    headerProgress.find('.progress-bar').css('width', `${progressData.percentage}%`);
+    
+    // Update sidebar progress
+    $('.sidebar-item:nth-child(2) strong').text(`${progressData.current}/${progressData.total}`);
+    $('.sidebar-item:nth-child(3) strong').text(`${Math.round(progressData.percentage)}%`);
+}
+
+function updateNavigationButtons(questionData) {
+    const navContainer = $('.navigation-container .row');
+    
+    // Update previous button
+    const prevCol = navContainer.find('.col-md-6:first');
+    if (questionData.has_previous) {
+        prevCol.html(`
+            <button type="button" class="btn btn-navigation btn-previous mr-2" onclick="navigateQuestion('previous')">
+                <i class="fas fa-arrow-left"></i> Câu trước
+            </button>
+        `);
+    } else {
+        prevCol.empty();
+    }
+    
+    // Update next/complete button
+    const nextCol = navContainer.find('.col-md-6:last');
+    if (questionData.has_next) {
+        nextCol.html(`
+            <button type="button" class="btn btn-navigation btn-next" onclick="navigateQuestion('next')">
+                Câu tiếp <i class="fas fa-arrow-right"></i>
+            </button>
+        `);
+    } else {
+        nextCol.html(`
+            <button type="button" class="btn btn-navigation btn-complete" onclick="confirmCompleteExam()">
+                <i class="fas fa-check"></i> Nộp bài
+            </button>
+        `);
+    }
+}
+
+function completeExam() {
+    $('#completeExamModal').modal('show');
+}
+
+function confirmCompleteExam() {
+    $('#completeExamModal').modal('hide');
+    
+    // Disable page leave warning for exam completion
+    window.removeEventListener('beforeunload', pageLeaveHandler);
+    
+    // Use AJAX to complete exam
+    $.post('{% url "exams:complete_exam_ajax" session.pk %}', {
+        'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val()
+    })
+    .done(function(response) {
+        if (response.status === 'success') {
+            // Stop timer and redirect to results
+            clearInterval(timerInterval);
+            window.location.href = response.redirect_url;
+        } else {
+            alert(response.message || 'Có lỗi xảy ra khi nộp bài.');
+            // Re-enable page leave warning if completion failed
+            window.addEventListener('beforeunload', pageLeaveHandler);
+        }
+    })
+    .fail(function() {
+        alert('Không thể nộp bài. Vui lòng thử lại.');
+        // Re-enable page leave warning if completion failed
+        window.addEventListener('beforeunload', pageLeaveHandler);
+    });
+}
+
+function checkTimeWithServer() {
+    $.get('{% url "exams:time_check" session.pk %}')
+        .done(function(data) {
+            if (data.status === 'expired') {
+                clearInterval(timerInterval);
+                alert(data.message);
+                window.location.href = data.redirect_url;
+            } else if (data.status === 'ok') {
+                // Sync with server time
+                timeRemaining = data.time_remaining;
+            }
+        })
+        .fail(function() {
+            console.log('Time check failed');
+        });
+}
+
+// Global variable to store the page leave handler
+let pageLeaveHandler;
+
+function setupPageLeaveWarning() {
+    pageLeaveHandler = function(e) {
+        const message = 'Bạn có chắc chắn muốn rời khỏi trang? Tiến độ thi có thể bị mất.';
+        e.returnValue = message;
+        return message;
+    };
+    
+    window.addEventListener('beforeunload', pageLeaveHandler);
+}
+
+// Keyboard shortcuts
+$(document).keydown(function(e) {
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        saveAnswer();
+    } else if (e.key === 'ArrowLeft' && {{ exam.allow_navigation|yesno:"true,false" }}) {
+        e.preventDefault();
+        if ({{ session.has_previous_question|yesno:"true,false" }}) {
+            navigateQuestion('previous');
+        }
+    } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        if ({{ session.has_next_question|yesno:"true,false" }}) {
+            navigateQuestion('next');
+        } else {
+            // Show completion modal for last question
+            completeExam();
+        }
+    } else if (e.key >= '1' && e.key <= '4') {
+        e.preventDefault();
+        const choiceIndex = parseInt(e.key) - 1;
+        const choice = $('input[name="choice"]').eq(choiceIndex);
+        if (choice.length) {
+            selectChoice(choice.val());
+        }
+    }
+});
+</script>
+{% endblock %}

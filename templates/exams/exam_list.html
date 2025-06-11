@@ -1,48 +1,205 @@
 {% extends 'base.html' %}
 
-{% block title %}Danh sách bài thi - HSK Exam System{% endblock %}
+{% block title %}Danh sách kỳ thi - HSK Exam System{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2><i class="fas fa-file-alt"></i> Danh sách bài thi HSK</h2>
-        <p class="text-muted">Chọn bài thi phù hợp với trình độ của bạn</p>
-        
-        {% if exams %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-graduation-cap"></i> Danh sách kỳ thi</h2>
+                {% if user.is_staff %}
+                <a href="{% url 'exams:create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tạo kỳ thi mới
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Search Form -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            {{ search_form.search.label_tag }}
+                            {{ search_form.search }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ search_form.hsk_level.label_tag }}
+                            {{ search_form.hsk_level }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ search_form.status.label_tag }}
+                            {{ search_form.status }}
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-secondary w-100">
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- User Recent Sessions -->
+            {% if user.is_authenticated and user_sessions %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-history"></i> Phiên thi gần đây của bạn</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Kỳ thi</th>
+                                    <th>Trạng thái</th>
+                                    <th>Điểm</th>
+                                    <th>Ngày thi</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for session in user_sessions %}
+                                <tr>
+                                    <td>{{ session.exam.title }}</td>
+                                    <td>
+                                        {% if session.status == 'completed' %}
+                                        <span class="badge bg-success">Hoàn thành</span>
+                                        {% elif session.status == 'in_progress' %}
+                                        <span class="badge bg-warning">Đang thi</span>
+                                        {% elif session.status == 'expired' %}
+                                        <span class="badge bg-danger">Hết hạn</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">{{ session.get_status_display }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if session.percentage %}
+                                        {{ session.percentage|floatformat:1 }}%
+                                        {% if session.passed %}
+                                        <i class="fas fa-check text-success"></i>
+                                        {% else %}
+                                        <i class="fas fa-times text-danger"></i>
+                                        {% endif %}
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>                                    <td>
+                                        {% if session.status == 'in_progress' %}
+                                        <a href="{% url 'exams:continue_exam' session.pk %}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-play"></i> Tiếp tục
+                                        </a>
+                                        {% elif session.status in 'completed,expired' %}
+                                        <a href="{% url 'exams:result' session.pk %}" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i> Xem kết quả
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}            <!-- Results Summary -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p class="text-muted">
+                        Tìm thấy <strong>{{ total_exams }}</strong> kỳ thi
+                    </p>
+                </div>
+                <div class="col-md-6 text-end">
+                    {% if user.is_staff %}
+                    <a href="{% url 'exams:session_list' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-chart-bar"></i> Quản lý phiên thi
+                    </a>
+                    {% endif %}
+                </div>
+            </div><!-- Exams List -->
+            {% if exams %}
             <div class="row">
                 {% for exam in exams %}
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">
-                                    <span class="hsk-level-{{ exam.hsk_level.level }}">
-                                        HSK {{ exam.hsk_level.level }}
-                                    </span>
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">{{ exam.title }}</h6>
-                                <p class="card-text">{{ exam.description|truncatewords:20 }}</p>
-                                
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-clock"></i> {{ exam.get_duration_display }}</li>
-                                    <li><i class="fas fa-question-circle"></i> {{ exam.total_questions }} câu hỏi</li>
-                                    <li><i class="fas fa-trophy"></i> Điểm qua: {{ exam.passing_score }}%</li>
-                                </ul>
-                                
-                                <a href="{% url 'exams:detail' exam.id %}" class="btn btn-primary">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">{{ exam.hsk_level.name }}</span>
+                            {% if exam.is_available %}
+                            <span class="badge bg-success">Đang mở</span>
+                            {% elif exam.start_date > now %}
+                            <span class="badge bg-warning">Sắp mở</span>
+                            {% else %}
+                            <span class="badge bg-secondary">Đã đóng</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">{{ exam.title }}</h6>
+                            <p class="card-text">{{ exam.description|truncatewords:20|default:"Không có mô tả" }}</p>
+
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-clock"></i> {{ exam.duration_minutes }} phút</li>
+                                <li><i class="fas fa-question-circle"></i> {{ exam.total_questions }} câu hỏi</li>
+                                <li><i class="fas fa-trophy"></i> Điểm qua: {{ exam.passing_score }}%</li>
+                            </ul>
+
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'exams:detail' exam.id %}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-info-circle"></i> Chi tiết
                                 </a>
+                                {% if user.is_staff %}
+                                <div class="btn-group">
+                                    <a href="{% url 'exams:update' exam.id %}" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'exams:delete' exam.id %}" class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
-        {% else %}
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <nav aria-label="Exam pagination">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i> Trước
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <span class="page-link">
+                            Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">
+                            Sau <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            {% else %}
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i> Hiện tại chưa có bài thi nào. Vui lòng quay lại sau!
             </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

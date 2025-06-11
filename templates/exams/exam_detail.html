@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ exam.title }} - Chi tiết kỳ thi{% endblock %}
+
+{% block extra_css %}
+<style>
+    .exam-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .exam-info-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .exam-info-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #667eea;
+        display: block;
+    }
+    
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+    
+    .session-history {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .session-item {
+        border-left: 4px solid #667eea;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .session-item.completed {
+        border-left-color: #28a745;
+    }
+    
+    .session-item.in_progress {
+        border-left-color: #ffc107;
+    }
+    
+    .session-item.expired {
+        border-left-color: #dc3545;
+    }
+    
+    .btn-start-exam {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-start-exam:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        color: white;
+    }
+    
+    .btn-continue-exam {
+        background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-continue-exam:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        color: white;
+    }
+    
+    .exam-requirements {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        padding: 1rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1rem 0;
+    }
+    
+    .availability-status {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+    
+    .status-available {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-upcoming {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .status-expired {
+        background: #f8d7da;
+        color: #721c24;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="exam-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-3">{{ exam.title }}</h1>
+                <p class="lead mb-3">{{ exam.description|default:"Mô tả kỳ thi" }}</p>
+                <div class="d-flex align-items-center">
+                    <span class="badge badge-light mr-3">{{ exam.hsk_level.name }}</span>
+                    {% if exam.is_available %}
+                        <span class="availability-status status-available">
+                            <i class="fas fa-check-circle"></i> Đang mở
+                        </span>
+                    {% elif exam.start_date > now %}
+                        <span class="availability-status status-upcoming">
+                            <i class="fas fa-clock"></i> Sắp mở
+                        </span>
+                    {% else %}
+                        <span class="availability-status status-expired">
+                            <i class="fas fa-times-circle"></i> Đã đóng
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4 text-md-right">
+                {% if user.is_authenticated %}
+                    {% if active_session %}
+                        <a href="{% url 'exams:continue_exam' active_session.pk %}" class="btn btn-continue-exam btn-lg">
+                            <i class="fas fa-play"></i> Tiếp tục thi
+                        </a>
+                    {% elif can_take_exam %}
+                        <a href="{% url 'exams:start' exam.pk %}" class="btn btn-start-exam btn-lg">
+                            <i class="fas fa-pencil-alt"></i> Bắt đầu thi
+                        </a>
+                    {% else %}
+                        <button class="btn btn-secondary btn-lg" disabled>
+                            <i class="fas fa-lock"></i> Không thể thi
+                        </button>
+                        <small class="d-block text-light mt-2">{{ take_exam_message }}</small>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Đăng nhập để thi
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Exam Information -->
+        <div class="col-md-8">
+            <div class="card exam-info-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-info-circle"></i> Thông tin kỳ thi</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-layer-group"></i> Cấp độ HSK</h6>
+                            <p class="text-muted">{{ exam.hsk_level.name }} - {{ exam.hsk_level.description }}</p>
+                            
+                            <h6><i class="fas fa-clock"></i> Thời gian thi</h6>
+                            <p class="text-muted">{{ exam.duration_minutes }} phút</p>
+                            
+                            <h6><i class="fas fa-question-circle"></i> Số câu hỏi</h6>
+                            <p class="text-muted">{{ exam.total_questions }} câu</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-calendar-alt"></i> Thời gian mở</h6>
+                            <p class="text-muted">
+                                {{ exam.start_date|date:"d/m/Y H:i" }}
+                                {% if exam.end_date %} - {{ exam.end_date|date:"d/m/Y H:i" }}{% endif %}
+                            </p>
+                            
+                            <h6><i class="fas fa-percent"></i> Điểm qua</h6>
+                            <p class="text-muted">{{ exam.passing_score }}%</p>
+                            
+                            <h6><i class="fas fa-redo"></i> Số lần thi</h6>
+                            <p class="text-muted">
+                                {% if exam.max_attempts %}
+                                    Tối đa {{ exam.max_attempts }} lần
+                                {% else %}
+                                    Không giới hạn
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    {% if exam.instructions %}
+                    <div class="exam-requirements">
+                        <h6><i class="fas fa-clipboard-list"></i> Hướng dẫn thi</h6>
+                        <div>{{ exam.instructions|linebreaks }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Exam Statistics -->
+            {% if total_sessions > 0 %}
+            <div class="card exam-info-card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="fas fa-chart-bar"></i> Thống kê</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ total_sessions }}</span>
+                                <div class="stat-label">Tổng lượt thi</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ completed_sessions }}</span>
+                                <div class="stat-label">Hoàn thành</div>
+                            </div>
+                        </div>
+                        {% if average_score %}
+                        <div class="col-md-3">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ average_score|floatformat:1 }}%</span>
+                                <div class="stat-label">Điểm trung bình</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if pass_rate %}
+                        <div class="col-md-3">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ pass_rate|floatformat:1 }}%</span>
+                                <div class="stat-label">Tỷ lệ đậu</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            {% if user.is_authenticated and user_sessions %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-history"></i> Lịch sử thi của bạn</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="session-history">
+                        {% for session in user_sessions %}
+                        <div class="session-item {{ session.status }}">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1">
+                                        {% if session.status == 'completed' %}
+                                            <i class="fas fa-check-circle text-success"></i> Hoàn thành
+                                        {% elif session.status == 'in_progress' %}
+                                            <i class="fas fa-clock text-warning"></i> Đang thi
+                                        {% elif session.status == 'expired' %}
+                                            <i class="fas fa-times-circle text-danger"></i> Hết hạn
+                                        {% else %}
+                                            <i class="fas fa-pause-circle text-secondary"></i> Chưa bắt đầu
+                                        {% endif %}
+                                    </h6>
+                                    <small class="text-muted">{{ session.created_at|date:"d/m/Y H:i" }}</small>
+                                    {% if session.status == 'completed' %}
+                                        <div class="mt-1">
+                                            <span class="badge {% if session.passed %}badge-success{% else %}badge-danger{% endif %}">
+                                                {{ session.percentage|floatformat:1 }}%
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    {% if session.status == 'in_progress' %}
+                                        <a href="{% url 'exams:continue_exam' session.pk %}" class="btn btn-sm btn-warning">
+                                            Tiếp tục
+                                        </a>
+                                    {% elif session.status == 'completed' or session.status == 'expired' %}
+                                        <a href="{% url 'exams:result' session.pk %}" class="btn btn-sm btn-outline-primary">
+                                            Xem kết quả
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Quick Actions -->
+            {% if user.is_staff %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cog"></i> Quản lý</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'exams:update' exam.pk %}" class="btn btn-outline-primary btn-block mb-2">
+                        <i class="fas fa-edit"></i> Sửa kỳ thi
+                    </a>
+                    <a href="{% url 'exams:session_list' %}?exam={{ exam.pk }}" class="btn btn-outline-info btn-block mb-2">
+                        <i class="fas fa-users"></i> Xem phiên thi
+                    </a>
+                    <a href="{% url 'exams:delete' exam.pk %}" class="btn btn-outline-danger btn-block">
+                        <i class="fas fa-trash"></i> Xóa kỳ thi
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Auto-refresh for active sessions
+    {% if active_session %}
+    setInterval(function() {
+        $.get('{% url "exams:time_check" active_session.pk %}')
+            .done(function(data) {
+                if (data.status === 'expired') {
+                    window.location.href = data.redirect_url;
+                }
+            });
+    }, 30000); // Check every 30 seconds
+    {% endif %}
+});
+</script>
+{% endblock %}
