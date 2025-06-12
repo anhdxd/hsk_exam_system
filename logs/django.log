@@ -2051,3 +2051,15 @@ INFO 2025-06-12 19:59:30,624 basehttp 11896 24620 "GET /exams/ HTTP/1.1" 200 220
 INFO 2025-06-12 19:59:30,680 basehttp 11896 24620 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
 INFO 2025-06-12 19:59:40,962 basehttp 11896 24620 "GET /exams/session/1/result/ HTTP/1.1" 200 13151
 INFO 2025-06-12 19:59:52,232 basehttp 11896 24620 "GET /exams/sessions/ HTTP/1.1" 200 17279
+INFO 2025-06-12 23:07:32,617 autoreload 17540 11964 Watching for file changes with StatReloader
+INFO 2025-06-12 23:07:39,927 basehttp 17540 13356 "GET / HTTP/1.1" 302 0
+INFO 2025-06-12 23:07:39,989 basehttp 17540 13356 "GET /accounts/dashboard/ HTTP/1.1" 200 9684
+INFO 2025-06-12 23:07:40,091 basehttp 17540 12140 "GET /static/js/main.js HTTP/1.1" 304 0
+INFO 2025-06-12 23:07:40,149 basehttp 17540 13356 "GET /static/css/style.css HTTP/1.1" 200 3419
+INFO 2025-06-12 23:07:42,968 basehttp 17540 13356 "GET /exams/ HTTP/1.1" 200 22091
+INFO 2025-06-12 23:07:43,035 basehttp 17540 13356 "GET /static/css/variables.css HTTP/1.1" 304 0
+INFO 2025-06-12 23:07:43,036 basehttp 17540 12140 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 23:07:43,037 basehttp 17540 27116 "GET /static/css/exams/exam_list.css HTTP/1.1" 304 0
+INFO 2025-06-12 23:07:45,027 basehttp 17540 27116 "GET /exams/3/ HTTP/1.1" 200 13325
+INFO 2025-06-12 23:07:45,083 basehttp 17540 27116 "GET /static/css/exams/exam_detail.css HTTP/1.1" 304 0
+INFO 2025-06-12 23:07:48,184 basehttp 17540 27116 "GET /exams/5/ HTTP/1.1" 200 10244

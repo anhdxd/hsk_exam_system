@@ -1,0 +1,44 @@
+/* Custom Color Scheme for HSK Exam System */
+
+:root {
+    /* Primary Colors - Blue Theme */
+    --exam-primary: #4c6ef5;
+    --exam-primary-dark: #364fc7;
+    --exam-primary-light: #748ffc;
+    
+    /* Secondary Colors */
+    --exam-secondary: #6c757d;
+    --exam-success: #51cf66;
+    --exam-warning: #ffd43b;
+    --exam-danger: #ff6b6b;
+    --exam-info: #339af0;
+    
+    /* Background Colors */
+    --exam-bg-primary: #f8f9ff;
+    --exam-bg-secondary: #e7f5ff;
+    --exam-border: #e1e5f2;
+    
+    /* Button Colors */
+    --start-btn-primary: #ff6b6b;
+    --start-btn-secondary: #ee5a52;
+    --start-btn-shadow: rgba(255, 107, 107, 0.4);
+    
+    /* Choice Colors */
+    --choice-bg: #f8f9ff;
+    --choice-border: #e1e5f2;
+    --choice-hover-bg: rgba(76, 110, 245, 0.08);
+    --choice-selected-bg: linear-gradient(135deg, rgba(76, 110, 245, 0.15) 0%, rgba(76, 110, 245, 0.08) 100%);
+    --choice-selected-border: #4c6ef5;
+    
+    /* Text Colors */
+    --text-primary: #495057;
+    --text-secondary: #6c757d;
+    --text-success: #2b8a3e;
+    --text-danger: #e03131;
+    
+    /* Shadow Effects */
+    --shadow-choice: 0 2px 8px rgba(76, 110, 245, 0.15);
+    --shadow-choice-focus: 0 0 0 3px rgba(76, 110, 245, 0.2);
+    --shadow-button: 0 4px 15px rgba(255, 107, 107, 0.4);
+    --shadow-button-hover: 0 8px 25px rgba(255, 107, 107, 0.6);
+}

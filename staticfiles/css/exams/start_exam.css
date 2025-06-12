@@ -176,7 +176,7 @@
 
 /* Action buttons */
 .start-exam-btn {
-    background: linear-gradient(135deg, var(--success-color) 0%, #20c997 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
     border: none;
     color: white;
     padding: 15px 40px;
@@ -184,13 +184,14 @@
     border-radius: 30px;
     font-weight: 600;
     transition: var(--transition);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }
 
 .start-exam-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
     color: white;
+    background: linear-gradient(135deg, #ff5252 0%, #e53e3e 100%);
 }
 
 .start-exam-btn:disabled {
