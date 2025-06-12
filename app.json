@@ -1,0 +1,35 @@
+{
+  "name": "HSK Exam System",
+  "description": "A Django-based HSK examination system",
+  "repository": "https://github.com/yourusername/hsk_exam_system",
+  "keywords": ["django", "hsk", "exam", "chinese", "education"],
+  "addons": [
+    {
+      "plan": "heroku-postgresql:essential-0"
+    }
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Django secret key",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "Django debug mode",
+      "value": "False"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "python manage.py migrate && python manage.py collectstatic --noinput"
+  }
+}
