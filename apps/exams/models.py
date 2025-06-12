@@ -267,13 +267,11 @@ class ExamSession(TimeStampedModel):
         verbose_name="Chỉ số câu hỏi hiện tại"
     )
     user_answers = models.JSONField(
-        default=dict,
-        blank=True,
+        default=dict,        blank=True,
         verbose_name="Câu trả lời của người dùng"
     )
 
     class Meta:
-        unique_together = ['exam', 'user', 'created_at']
         ordering = ['-created_at']
         verbose_name = 'Phiên thi'
         verbose_name_plural = 'Phiên thi'

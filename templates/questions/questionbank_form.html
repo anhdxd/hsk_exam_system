@@ -8,7 +8,8 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <!-- Header -->            <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Header -->            
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>
                     <i class="fas fa-database"></i>
                     {% if view.object %}Sửa ngân hàng câu hỏi{% else %}Tạo ngân hàng câu hỏi mới{% endif %}
@@ -29,7 +30,8 @@
                 </div>
             {% endif %}
 
-            <div class="card">                <div class="card-header">
+            <div class="card">                
+                <div class="card-header">
                     <h5>
                         <i class="fas fa-edit"></i> 
                         {% if view.object %}Chỉnh sửa thông tin{% else %}Thông tin ngân hàng{% endif %}
@@ -91,12 +93,22 @@
                             {% if form.is_active.help_text %}
                                 <div class="form-text">{{ form.is_active.help_text }}</div>
                             {% endif %}
-                        </div>                        {% if view.object %}
+                        </div>                        
+                        {% if view.object %}
                             <div class="mb-3">
                                 <label for="{{ form.questions.id_for_label }}" class="form-label">
                                     {{ form.questions.label }}
                                 </label>
-                                {{ form.questions }}
+                                <div class="form-control" style="height: auto; padding: 10px;">
+                                    {% for choice in form.questions %}
+                                        <div class="form-check">
+                                            {{ choice.tag }}
+                                            <label for="{{ choice.id_for_label }}" class="form-check-label">
+                                                {{ choice.choice_label }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                                 {% if form.questions.errors %}
                                     <div class="text-danger">{{ form.questions.errors }}</div>
                                 {% endif %}
@@ -116,7 +128,8 @@
                             </a>
                         </div>
                     </form>
-                </div>            </div>
+                </div>            
+            </div>
 
             {% if view.object %}
                 <div class="card mt-4">

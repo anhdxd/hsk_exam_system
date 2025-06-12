@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{% if object %}Sửa kỳ thi{% else %}Tạo kỳ thi mới{% endif %} - HSK Exam System
+{% if view.object %}Sửa kỳ thi{% else %}Tạo kỳ thi mới{% endif %} - HSK Exam System
 {% endblock %}
 
 {% block extra_css %}
@@ -15,13 +15,12 @@
 <div class="form-header">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h1>
+            <div class="col-12">                <h1>
                     <i class="fas fa-plus-circle"></i>
-                    {% if object %}Sửa kỳ thi: {{ object.title }}{% else %}Tạo kỳ thi mới{% endif %}
+                    {% if view.object %}Sửa kỳ thi: {{ view.object.title }}{% else %}Tạo kỳ thi mới{% endif %}
                 </h1>
                 <p class="lead mb-0">
-                    {% if object %}Cập nhật thông tin kỳ thi{% else %}Tạo một kỳ thi HSK mới{% endif %}
+                    {% if view.object %}Cập nhật thông tin kỳ thi{% else %}Tạo một kỳ thi HSK mới{% endif %}
                 </p>
             </div>
         </div>
@@ -268,13 +267,12 @@
                     </div>
                 </div>
 
-                <!-- Form Actions -->
-                <div class="text-center">
+                <!-- Form Actions -->                <div class="text-center">
                     <button type="submit" class="btn btn-save mr-3">
                         <i class="fas fa-save"></i>
-                        {% if object %}Cập nhật kỳ thi{% else %}Tạo kỳ thi{% endif %}
+                        {% if view.object %}Cập nhật kỳ thi{% else %}Tạo kỳ thi{% endif %}
                     </button>
-                    <a href="{% if object %}{% url 'exams:detail' object.pk %}{% else %}{% url 'exams:list' %}{% endif %}"
+                    <a href="{% if view.object %}{% url 'exams:detail' view.object.pk %}{% else %}{% url 'exams:list' %}{% endif %}"
                         class="btn btn-cancel">
                         <i class="fas fa-times"></i> Hủy
                     </a>
@@ -317,10 +315,8 @@
                 alert('Ngày kết thúc phải sau ngày bắt đầu');
                 $('#id_end_date').val('');
             }
-        });
-
-        // Initialize datetime-local with current date if creating new exam
-        {% if not object %}
+        });        // Initialize datetime-local with current date if creating new exam
+        {% if not view.object %}
         if (!$('#id_start_date').val()) {
             var now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());

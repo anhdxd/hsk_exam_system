@@ -942,3 +942,198 @@ INFO 2025-06-11 16:08:55,718 basehttp 46888 40884 "GET /static/css/exams/exam_fo
 INFO 2025-06-11 16:09:14,429 basehttp 46888 40884 "GET /exams/session/3/result/ HTTP/1.1" 200 19174
 INFO 2025-06-11 16:09:40,540 basehttp 46888 40884 "GET /exams/2/ HTTP/1.1" 200 18420
 INFO 2025-06-11 16:09:52,145 basehttp 46888 40884 "GET /exams/2/edit/ HTTP/1.1" 200 19032
+INFO 2025-06-11 16:22:27,073 basehttp 46888 16024 "GET /exams/2/edit/ HTTP/1.1" 200 19032
+INFO 2025-06-11 16:22:27,104 basehttp 46888 16024 "GET /static/css/exams/exam_form.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:22:31,512 basehttp 46888 16024 "GET /exams/2/edit/ HTTP/1.1" 200 19032
+INFO 2025-06-11 16:23:02,899 basehttp 46888 16024 "GET /exams/2/edit/ HTTP/1.1" 200 18988
+INFO 2025-06-11 16:24:30,651 basehttp 46888 16024 "GET /exams/2/edit/ HTTP/1.1" 200 18942
+INFO 2025-06-11 16:24:30,695 basehttp 46888 16024 "GET /static/css/variables.css HTTP/1.1" 200 2474
+INFO 2025-06-11 16:24:30,696 basehttp 46888 15384 "GET /static/css/exams/exam_common.css HTTP/1.1" 200 5068
+INFO 2025-06-11 16:24:46,427 basehttp 46888 15384 "GET /exams/2/edit/ HTTP/1.1" 200 18844
+INFO 2025-06-11 16:24:51,097 basehttp 46888 15384 "POST /exams/2/edit/ HTTP/1.1" 302 0
+INFO 2025-06-11 16:24:51,117 basehttp 46888 15384 "GET /exams/2/ HTTP/1.1" 200 16084
+INFO 2025-06-11 16:24:51,152 basehttp 46888 15384 "GET /static/css/exams/exam_detail.css HTTP/1.1" 200 3302
+INFO 2025-06-11 16:24:57,145 basehttp 46888 15384 "GET /exams/2/delete/ HTTP/1.1" 200 13594
+INFO 2025-06-11 16:24:57,188 basehttp 46888 15384 "GET /static/css/exams/exam_confirm_delete.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:25:03,019 basehttp 46888 15384 "GET / HTTP/1.1" 302 0
+INFO 2025-06-11 16:25:03,046 basehttp 46888 15384 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-11 16:25:07,110 basehttp 46888 15384 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-11 16:25:09,824 basehttp 46888 15384 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-11 16:25:11,232 basehttp 46888 15384 "GET /accounts/profile/ HTTP/1.1" 200 8276
+INFO 2025-06-11 16:25:14,215 basehttp 46888 15384 "GET /questions/ HTTP/1.1" 200 42994
+INFO 2025-06-11 16:25:22,425 basehttp 46888 15384 "GET /questions/import/ HTTP/1.1" 200 15315
+INFO 2025-06-11 16:25:24,260 basehttp 46888 15384 "GET /questions/ HTTP/1.1" 200 42994
+INFO 2025-06-11 16:25:26,543 basehttp 46888 15384 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-11 16:25:30,142 basehttp 46888 15384 "GET /questions/banks/19/edit/ HTTP/1.1" 200 12129
+INFO 2025-06-11 16:27:27,400 basehttp 46888 15384 "GET /questions/banks/18/ HTTP/1.1" 200 9443
+INFO 2025-06-11 16:27:32,014 basehttp 46888 15384 "GET /questions/create/?bank=18 HTTP/1.1" 200 35704
+INFO 2025-06-11 16:27:35,282 basehttp 46888 15384 "GET /questions/create/?bank=18 HTTP/1.1" 200 35704
+INFO 2025-06-11 16:27:37,366 basehttp 46888 15384 "GET /questions/banks/18/edit/ HTTP/1.1" 200 12134
+INFO 2025-06-11 16:27:41,898 basehttp 46888 15384 "POST /questions/banks/18/edit/ HTTP/1.1" 302 0
+INFO 2025-06-11 16:27:41,914 basehttp 46888 15384 "GET /questions/banks/18/ HTTP/1.1" 200 14036
+INFO 2025-06-11 16:28:08,329 autoreload 46888 43620 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:28:08,835 autoreload 40696 60444 Watching for file changes with StatReloader
+INFO 2025-06-11 16:32:02,870 autoreload 40696 60444 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:32:03,353 autoreload 33496 14544 Watching for file changes with StatReloader
+INFO 2025-06-11 16:32:19,448 autoreload 33496 14544 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:32:19,924 autoreload 52048 19852 Watching for file changes with StatReloader
+WARNING 2025-06-11 16:32:37,457 log 52048 33612 Not Found: /exams/session/8/result/
+WARNING 2025-06-11 16:32:37,457 basehttp 52048 33612 "GET /exams/session/8/result/ HTTP/1.1" 404 4238
+WARNING 2025-06-11 16:32:42,804 log 52048 33612 Not Found: /exams/session/8/take/
+WARNING 2025-06-11 16:32:42,804 basehttp 52048 33612 "GET /exams/session/8/take/ HTTP/1.1" 404 3825
+WARNING 2025-06-11 16:32:44,620 log 52048 33612 Not Found: /exams/1/start/
+WARNING 2025-06-11 16:32:44,620 basehttp 52048 33612 "GET /exams/1/start/ HTTP/1.1" 404 3599
+INFO 2025-06-11 16:32:48,995 autoreload 22384 27060 Watching for file changes with StatReloader
+WARNING 2025-06-11 16:32:50,506 log 22384 60812 Not Found: /exams/1/start/
+WARNING 2025-06-11 16:32:50,507 basehttp 22384 60812 "GET /exams/1/start/ HTTP/1.1" 404 3599
+INFO 2025-06-11 16:32:53,120 basehttp 22384 60812 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-11 16:32:53,165 basehttp 22384 60812 "GET /static/css/variables.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:32:53,165 basehttp 22384 44064 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:32:53,202 basehttp 22384 53908 "GET /static/css/exams/exam_list.css HTTP/1.1" 200 4069
+INFO 2025-06-11 16:32:55,705 basehttp 22384 53908 "GET /exams/2/edit/ HTTP/1.1" 200 18844
+INFO 2025-06-11 16:32:55,749 basehttp 22384 53908 "GET /static/css/exams/exam_form.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:32:59,674 basehttp 22384 53908 "GET /exams/session/3/result/ HTTP/1.1" 200 19174
+INFO 2025-06-11 16:32:59,711 basehttp 22384 53908 "GET /static/css/exams/exam_result.css HTTP/1.1" 200 6534
+INFO 2025-06-11 16:33:05,050 basehttp 22384 53908 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-11 16:33:06,732 basehttp 22384 53908 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-11 16:33:06,763 basehttp 22384 53908 "GET /static/css/exams/exam_detail.css HTTP/1.1" 304 0
+INFO 2025-06-11 16:33:09,047 basehttp 22384 53908 "GET /exams/2/edit/ HTTP/1.1" 200 18844
+INFO 2025-06-11 16:33:15,950 basehttp 22384 53908 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+INFO 2025-06-11 16:33:20,656 basehttp 22384 53908 "GET /questions/ HTTP/1.1" 200 42994
+INFO 2025-06-11 16:33:23,773 basehttp 22384 53908 "GET /questions/25/edit/ HTTP/1.1" 200 37121
+INFO 2025-06-11 16:33:30,798 basehttp 22384 53908 "GET /questions/25/ HTTP/1.1" 200 13450
+INFO 2025-06-11 16:33:34,718 basehttp 22384 53908 "GET /questions/25/delete/ HTTP/1.1" 200 8396
+INFO 2025-06-11 16:33:38,571 basehttp 22384 53908 "POST /questions/25/delete/ HTTP/1.1" 302 0
+INFO 2025-06-11 16:33:38,591 basehttp 22384 53908 "GET /questions/ HTTP/1.1" 200 42974
+INFO 2025-06-11 16:33:45,648 basehttp 22384 53908 "GET /questions/create/ HTTP/1.1" 200 35704
+INFO 2025-06-11 16:33:59,663 basehttp 22384 53908 "GET /questions/banks/18/ HTTP/1.1" 200 13704
+INFO 2025-06-11 16:34:05,758 basehttp 22384 53908 "GET /questions/banks/18/edit/ HTTP/1.1" 200 11925
+INFO 2025-06-11 16:34:49,269 basehttp 22384 53908 "GET /questions/banks/18/edit/ HTTP/1.1" 200 11925
+INFO 2025-06-11 16:34:55,195 autoreload 22384 27060 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:34:55,713 autoreload 18216 31132 Watching for file changes with StatReloader
+INFO 2025-06-11 16:35:11,604 autoreload 18216 31132 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:35:12,073 autoreload 47132 28612 Watching for file changes with StatReloader
+INFO 2025-06-11 16:35:27,922 autoreload 47132 28612 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:35:28,370 autoreload 31476 13572 Watching for file changes with StatReloader
+INFO 2025-06-11 16:35:39,341 autoreload 31476 13572 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:35:39,877 autoreload 9436 60072 Watching for file changes with StatReloader
+INFO 2025-06-11 16:35:49,765 autoreload 9436 60072 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:35:50,263 autoreload 44844 10320 Watching for file changes with StatReloader
+INFO 2025-06-11 16:35:59,061 autoreload 44844 10320 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:35:59,540 autoreload 19648 20236 Watching for file changes with StatReloader
+INFO 2025-06-11 16:36:01,042 autoreload 19648 20236 D:\anhdxd\hsk_exam_system\apps\questions\forms.py changed, reloading.
+INFO 2025-06-11 16:36:01,491 autoreload 43796 52072 Watching for file changes with StatReloader
+INFO 2025-06-11 16:36:35,677 autoreload 14692 34644 Watching for file changes with StatReloader
+INFO 2025-06-11 16:36:37,461 basehttp 14692 55880 "GET /questions/banks/18/edit/ HTTP/1.1" 200 11925
+INFO 2025-06-11 16:36:38,611 basehttp 14692 55880 "GET /questions/banks/18/edit/ HTTP/1.1" 200 11925
+INFO 2025-06-11 16:38:02,007 basehttp 14692 55880 "GET /questions/banks/18/edit/ HTTP/1.1" 200 14062
+INFO 2025-06-11 16:38:22,347 basehttp 14692 55880 "GET /questions/banks/18/edit/ HTTP/1.1" 200 14062
+INFO 2025-06-11 16:38:26,746 basehttp 14692 55880 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-11 16:38:30,801 basehttp 14692 55880 "GET /questions/banks/17/ HTTP/1.1" 200 9567
+INFO 2025-06-11 16:38:32,453 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:38:46,368 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:38:58,655 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:38:59,694 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,025 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,245 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,459 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,598 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,774 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:00,941 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:01,109 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:01,255 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:01,395 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:01,548 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:03,145 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,079 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,281 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,391 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,664 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,801 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:04,943 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,095 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,269 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,430 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,580 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,700 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:05,907 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:06,136 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:06,339 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:06,538 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:06,645 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:06,864 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:07,819 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:08,037 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:08,172 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:39:08,337 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11477
+INFO 2025-06-11 16:41:38,187 basehttp 14692 55880 "GET /questions/banks/ HTTP/1.1" 200 76781
+INFO 2025-06-11 16:42:29,954 basehttp 14692 55880 "GET /questions/banks/17/ HTTP/1.1" 200 9567
+INFO 2025-06-11 16:42:32,694 basehttp 14692 55880 "GET /questions/banks/17/edit/ HTTP/1.1" 200 11545
+WARNING 2025-06-11 17:18:44,673 log 45480 27068 Not Found: /exams/999/
+WARNING 2025-06-11 17:20:23,764 log 60080 13120 Not Found: /exams/999/
+WARNING 2025-06-11 17:21:07,560 log 63124 29044 Not Found: /exams/999/
+WARNING 2025-06-11 17:27:16,101 log 35208 59304 Not Found: /exams/999/
+WARNING 2025-06-11 17:32:05,116 log 38224 55888 Not Found: /exams/999/
+WARNING 2025-06-11 17:32:46,724 log 60980 41328 Not Found: /exams/999/
+WARNING 2025-06-11 17:33:02,762 log 45944 17772 Not Found: /exams/999/
+WARNING 2025-06-11 17:33:15,930 log 1188 8908 Not Found: /exams/999/
+WARNING 2025-06-11 17:42:17,139 log 45668 8112 Not Found: /exams/999/
+WARNING 2025-06-11 17:42:23,993 log 45668 8112 Not Found: /exams/session/1/result/
+WARNING 2025-06-11 17:49:32,981 log 13648 4588 Not Found: /exams/999/
+WARNING 2025-06-11 17:49:39,741 log 13648 4588 Not Found: /exams/session/1/result/
+INFO 2025-06-11 17:50:24,203 autoreload 60576 41388 Watching for file changes with StatReloader
+INFO 2025-06-11 17:50:26,709 basehttp 60576 39964 "GET /questions/create/?bank=17 HTTP/1.1" 200 35704
+INFO 2025-06-11 17:50:30,034 basehttp 60576 39964 "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-06-11 17:50:30,042 basehttp 60576 39964 "GET /accounts/login/ HTTP/1.1" 200 5875
+INFO 2025-06-11 17:50:34,583 basehttp 60576 39964 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-06-11 17:50:34,597 basehttp 60576 39964 "GET /accounts/dashboard/ HTTP/1.1" 200 9999
+INFO 2025-06-11 17:50:36,897 basehttp 60576 39964 "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-06-11 17:50:36,903 basehttp 60576 39964 "GET /accounts/login/ HTTP/1.1" 200 5875
+WARNING 2025-06-11 17:53:19,668 log 8372 29284 Not Found: /exams/999/
+WARNING 2025-06-11 17:53:26,469 log 8372 29284 Not Found: /exams/session/1/result/
+INFO 2025-06-11 17:54:42,901 autoreload 7484 51068 Watching for file changes with StatReloader
+INFO 2025-06-11 17:54:45,742 basehttp 7484 52096 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-06-11 17:54:45,763 basehttp 7484 52096 "GET /accounts/dashboard/ HTTP/1.1" 200 9999
+INFO 2025-06-11 17:54:52,893 basehttp 7484 52096 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-11 17:54:52,931 basehttp 7484 52096 "GET /static/css/variables.css HTTP/1.1" 304 0
+INFO 2025-06-11 17:54:52,932 basehttp 7484 32908 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-11 17:54:52,932 basehttp 7484 17460 "GET /static/css/exams/exam_list.css HTTP/1.1" 304 0
+INFO 2025-06-11 17:54:56,805 basehttp 7484 17460 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-11 17:54:56,848 basehttp 7484 17460 "GET /static/css/exams/exam_detail.css HTTP/1.1" 304 0
+INFO 2025-06-11 17:54:58,927 basehttp 7484 17460 "GET /exams/create/ HTTP/1.1" 200 19723
+INFO 2025-06-11 17:54:58,964 basehttp 7484 17460 "GET /static/css/exams/exam_form.css HTTP/1.1" 304 0
+INFO 2025-06-11 17:58:40,698 basehttp 7484 17460 "GET /exams/create/ HTTP/1.1" 200 19719
+INFO 2025-06-11 17:58:51,363 basehttp 7484 17460 "GET /exams/create/ HTTP/1.1" 200 19719
+INFO 2025-06-11 17:58:55,402 basehttp 7484 17460 "GET /exams/create/ HTTP/1.1" 200 19719
+INFO 2025-06-11 17:58:57,937 basehttp 7484 17460 "GET /exams/session/3/result/ HTTP/1.1" 200 19174
+INFO 2025-06-11 17:58:57,972 basehttp 7484 17460 "GET /static/css/exams/exam_result.css HTTP/1.1" 304 0
+ERROR 2025-06-11 17:59:01,390 log 7484 17460 Internal Server Error: /exams/sessions/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: exams/session_list.html, exams/examsession_list.html
+ERROR 2025-06-11 17:59:01,391 basehttp 7484 17460 "GET /exams/sessions/ HTTP/1.1" 500 90553
+INFO 2025-06-11 17:59:03,586 basehttp 7484 17460 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-11 17:59:07,128 basehttp 7484 17460 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-11 17:59:12,088 basehttp 7484 17460 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+INFO 2025-06-11 17:59:13,824 basehttp 7484 17460 "GET /exams/?search=&hsk_level=&status= HTTP/1.1" 200 15198
+INFO 2025-06-11 17:59:14,672 basehttp 7484 17460 "GET /exams/create/ HTTP/1.1" 200 19719
+WARNING 2025-06-12 10:47:47,282 log 8220 9132 Not Found: /exams/999/
+WARNING 2025-06-12 10:47:54,239 log 8220 9132 Not Found: /exams/session/1/result/
+WARNING 2025-06-12 10:48:27,061 log 21032 23256 Not Found: /exams/999/
+WARNING 2025-06-12 10:48:34,302 log 21032 23256 Not Found: /exams/session/1/result/
