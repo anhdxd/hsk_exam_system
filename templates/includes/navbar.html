@@ -19,19 +19,13 @@
           <a class="nav-link" href="{% url 'home' %}">
             <i class="fas fa-home"></i> Trang chủ
           </a>
-        </li>
-        {% if user.is_authenticated %} {% comment %}
+        </li>        
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'exams:list' %}">
             <i class="fas fa-file-alt"></i> Bài thi
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'analytics:dashboard' %}">
-            <i class="fas fa-chart-bar"></i> Thống kê
-          </a>
-        </li>
-        {% endcomment %} 
         {% if user.is_staff %}
         <li class="nav-item dropdown">
           <a
@@ -65,13 +59,7 @@
               </a>
             </li>
           </ul>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:dashboard' %}">
-            <i class="fas fa-file-alt"></i> Bài thi (Coming Soon)
-          </a>
-        </li>
+        </li>        {% endif %}
         {% endif %}
       </ul>
 

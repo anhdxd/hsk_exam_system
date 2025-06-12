@@ -20,6 +20,7 @@ class ExamAnswer(TimeStampedModel):
         default=0, help_text="Time spent on this question")
 
     class Meta:
+        app_label = 'submissions'
         unique_together = ['exam_session', 'question']
         ordering = ['question__id']
         verbose_name = 'Exam Answer'

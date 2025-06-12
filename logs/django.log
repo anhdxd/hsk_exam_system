@@ -1669,3 +1669,385 @@ Traceback (most recent call last):
     raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
 django.template.exceptions.TemplateDoesNotExist: exams/session_list.html, exams/examsession_list.html
 ERROR 2025-06-12 14:07:26,066 basehttp 22548 13324 "GET /exams/sessions/?exam=2 HTTP/1.1" 500 91170
+INFO 2025-06-12 19:30:52,191 autoreload 24788 18064 Watching for file changes with StatReloader
+ERROR 2025-06-12 19:30:55,027 log 24788 22120 Internal Server Error: /accounts/dashboard/
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\apps\accounts\views.py", line 98, in dashboard_view
+    return render(request, 'accounts/dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'submission_list' not found. 'submission_list' is not a valid view function or pattern name.
+ERROR 2025-06-12 19:30:55,031 basehttp 24788 22120 "GET /accounts/dashboard/ HTTP/1.1" 500 213551
+INFO 2025-06-12 19:31:25,410 basehttp 24788 22120 "GET /accounts/dashboard/ HTTP/1.1" 200 9814
+INFO 2025-06-12 19:31:25,489 basehttp 24788 22120 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:31:30,973 basehttp 24788 22120 "GET /exams/ HTTP/1.1" 200 22221
+INFO 2025-06-12 19:31:31,029 basehttp 24788 22120 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:31:49,829 basehttp 24788 22120 "GET /exams/session/1/result/ HTTP/1.1" 200 13281
+INFO 2025-06-12 19:31:55,890 basehttp 24788 22120 "GET /exams/1/ HTTP/1.1" 200 10309
+ERROR 2025-06-12 19:32:01,031 log 24788 22120 Internal Server Error: /exams/sessions/
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: exams/session_list.html, exams/examsession_list.html
+ERROR 2025-06-12 19:32:01,035 basehttp 24788 22120 "GET /exams/sessions/?exam=1 HTTP/1.1" 500 90692
+INFO 2025-06-12 19:37:19,051 autoreload 11896 18472 Watching for file changes with StatReloader
+INFO 2025-06-12 19:37:20,776 basehttp 11896 15260 "GET /exams/sessions/?exam=1 HTTP/1.1" 200 12822
+INFO 2025-06-12 19:37:20,838 basehttp 11896 15260 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:37:30,374 basehttp 11896 15260 "GET /exams/ HTTP/1.1" 200 22221
+INFO 2025-06-12 19:37:30,441 basehttp 11896 15260 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:37:31,838 basehttp 11896 15260 "GET /exams/sessions/ HTTP/1.1" 200 17409
+INFO 2025-06-12 19:37:35,113 basehttp 11896 15260 "GET /exams/sessions/ HTTP/1.1" 200 17409
+INFO 2025-06-12 19:37:37,945 basehttp 11896 15260 "GET /exams/session/1/result/ HTTP/1.1" 200 13281
+INFO 2025-06-12 19:37:39,892 basehttp 11896 15260 "GET /admin/exams/examsession/1/change/ HTTP/1.1" 200 23049
+INFO 2025-06-12 19:37:40,009 basehttp 11896 27692 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:37:40,331 basehttp 11896 15260 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-12 19:37:40,371 basehttp 11896 7144 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-12 19:37:40,378 basehttp 11896 15012 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-12 19:37:40,378 basehttp 11896 22048 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-12 19:37:40,382 basehttp 11896 15260 "GET /static/admin/js/calendar.js HTTP/1.1" 200 8466
+INFO 2025-06-12 19:37:40,388 basehttp 11896 15856 "GET /static/admin/css/forms.css HTTP/1.1" 200 9047
+INFO 2025-06-12 19:37:40,403 basehttp 11896 15012 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-06-12 19:37:40,407 basehttp 11896 7144 "GET /static/admin/js/collapse.js HTTP/1.1" 200 1803
+INFO 2025-06-12 19:37:40,415 basehttp 11896 15856 "GET /static/admin/js/core.js HTTP/1.1" 200 5682
+INFO 2025-06-12 19:37:40,421 basehttp 11896 15260 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 8943
+INFO 2025-06-12 19:37:40,421 basehttp 11896 22048 "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+INFO 2025-06-12 19:37:40,422 basehttp 11896 15012 "GET /static/admin/css/widgets.css HTTP/1.1" 200 11900
+INFO 2025-06-12 19:37:40,452 basehttp 11896 27692 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+INFO 2025-06-12 19:37:40,457 basehttp 11896 22048 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-06-12 19:37:40,459 basehttp 11896 15012 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-06-12 19:37:40,459 basehttp 11896 15856 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-06-12 19:37:40,461 basehttp 11896 7144 "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+INFO 2025-06-12 19:37:40,474 basehttp 11896 22048 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-06-12 19:37:40,480 basehttp 11896 15260 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO 2025-06-12 19:37:40,484 basehttp 11896 15012 "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-06-12 19:37:40,502 basehttp 11896 7144 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-06-12 19:37:40,572 basehttp 11896 15260 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-12 19:37:40,612 basehttp 11896 15260 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-12 19:37:40,629 basehttp 11896 27692 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-06-12 19:37:40,658 basehttp 11896 27692 "GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 200 280
+INFO 2025-06-12 19:37:40,771 basehttp 11896 15260 "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+INFO 2025-06-12 19:37:40,771 basehttp 11896 27692 "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+INFO 2025-06-12 19:38:03,475 basehttp 11896 15260 "GET /exams/sessions/ HTTP/1.1" 200 17409
+INFO 2025-06-12 19:38:04,364 basehttp 11896 15260 "GET /exams/sessions/ HTTP/1.1" 200 17409
+INFO 2025-06-12 19:38:05,044 basehttp 11896 15260 "GET /admin/exams/examsession/1/change/ HTTP/1.1" 200 23049
+INFO 2025-06-12 19:38:05,107 basehttp 11896 15260 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:38:08,806 basehttp 11896 15260 "GET /admin/accounts/customuser/add/ HTTP/1.1" 200 16166
+INFO 2025-06-12 19:38:08,880 basehttp 11896 15260 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:38:15,490 basehttp 11896 15260 "GET /admin/ HTTP/1.1" 200 10693
+INFO 2025-06-12 19:38:15,545 basehttp 11896 15260 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-06-12 19:38:17,726 basehttp 11896 15260 "GET /admin/accounts/customuser/add/ HTTP/1.1" 200 16166
+INFO 2025-06-12 19:38:19,662 basehttp 11896 15260 "GET / HTTP/1.1" 302 0
+INFO 2025-06-12 19:38:19,705 basehttp 11896 15260 "GET /accounts/dashboard/ HTTP/1.1" 200 9814
+INFO 2025-06-12 19:38:21,808 basehttp 11896 15260 "GET /admin/accounts/customuser/add/ HTTP/1.1" 200 16166
+INFO 2025-06-12 19:56:25,164 basehttp 11896 14828 "GET /admin/exams/examsession/1/change/ HTTP/1.1" 200 23049
+INFO 2025-06-12 19:56:29,653 basehttp 11896 14828 "GET /admin/exams/examsession/1/change/ HTTP/1.1" 200 23049
+INFO 2025-06-12 19:56:29,736 basehttp 11896 14828 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+ERROR 2025-06-12 19:56:33,965 log 11896 14828 Internal Server Error: /admin/exams/examanswer/
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: exams_examanswer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\views\decorators\cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 1926, in changelist_view
+    cl = self.get_changelist_instance(request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 836, in get_changelist_instance
+    return ChangeList(
+           ^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\views\main.py", line 123, in __init__
+    self.get_results(request)
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\views\main.py", line 279, in get_results
+    result_count = paginator.count
+                   ^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: exams_examanswer
+ERROR 2025-06-12 19:56:33,973 basehttp 11896 14828 "GET /admin/exams/examanswer/ HTTP/1.1" 500 188929
+INFO 2025-06-12 19:56:36,546 basehttp 11896 14828 "GET /admin/exams/examsession/1/change/ HTTP/1.1" 200 23049
+INFO 2025-06-12 19:56:38,236 basehttp 11896 14828 "GET /admin/exams/exam/ HTTP/1.1" 200 19375
+INFO 2025-06-12 19:56:38,305 basehttp 11896 14828 "GET /static/admin/css/changelists.css HTTP/1.1" 200 6566
+INFO 2025-06-12 19:56:38,305 basehttp 11896 4524 "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-06-12 19:56:38,311 basehttp 11896 24620 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:56:38,312 basehttp 11896 18804 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-06-12 19:56:38,337 basehttp 11896 18804 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-06-12 19:56:38,341 basehttp 11896 24620 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-06-12 19:56:38,343 basehttp 11896 4524 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-06-12 19:56:44,985 basehttp 11896 18804 "GET /admin/auth/group/ HTTP/1.1" 200 11100
+INFO 2025-06-12 19:56:45,050 basehttp 11896 18804 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:56:46,687 basehttp 11896 18804 "GET /admin/questions/questiontype/ HTTP/1.1" 200 14019
+INFO 2025-06-12 19:56:46,752 basehttp 11896 18804 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:56:54,777 basehttp 11896 18804 "GET /admin/questions/questiontype/9/change/ HTTP/1.1" 200 12521
+INFO 2025-06-12 19:56:54,842 basehttp 11896 18804 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:57:02,623 basehttp 11896 18804 "GET /admin/questions/questiontype/ HTTP/1.1" 200 14019
+ERROR 2025-06-12 19:57:05,771 log 11896 18804 Internal Server Error: /admin/exams/examanswer/
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: exams_examanswer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\views\decorators\cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 1926, in changelist_view
+    cl = self.get_changelist_instance(request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\options.py", line 836, in get_changelist_instance
+    return ChangeList(
+           ^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\views\main.py", line 123, in __init__
+    self.get_results(request)
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\admin\views\main.py", line 279, in get_results
+    result_count = paginator.count
+                   ^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: exams_examanswer
+ERROR 2025-06-12 19:57:05,793 basehttp 11896 18804 "GET /admin/exams/examanswer/ HTTP/1.1" 500 188925
+INFO 2025-06-12 19:57:07,521 basehttp 11896 18804 "GET /admin/questions/questiontype/ HTTP/1.1" 200 14019
+INFO 2025-06-12 19:57:10,503 basehttp 11896 18804 "GET /admin/common/hsklevel/ HTTP/1.1" 200 15416
+INFO 2025-06-12 19:57:10,570 basehttp 11896 18804 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:58:54,098 basehttp 11896 18804 "GET /admin/questions/questiontype/ HTTP/1.1" 200 14019
+INFO 2025-06-12 19:58:54,871 basehttp 11896 18804 "GET /admin/auth/group/ HTTP/1.1" 200 11100
+INFO 2025-06-12 19:58:55,464 basehttp 11896 18804 "GET /admin/exams/exam/ HTTP/1.1" 200 19375
+INFO 2025-06-12 19:58:57,389 basehttp 11896 18804 "GET /admin/accounts/profile/ HTTP/1.1" 200 15648
+INFO 2025-06-12 19:58:57,457 basehttp 11896 18804 "GET /admin/jsi18n/ HTTP/1.1" 200 8817
+INFO 2025-06-12 19:58:59,488 basehttp 11896 18804 "GET /admin/ HTTP/1.1" 200 10693
+INFO 2025-06-12 19:59:01,090 basehttp 11896 18804 "GET /admin/accounts/profile/ HTTP/1.1" 200 15648
+INFO 2025-06-12 19:59:01,826 basehttp 11896 18804 "GET /admin/accounts/ HTTP/1.1" 200 5601
+INFO 2025-06-12 19:59:02,634 basehttp 11896 18804 "GET /admin/ HTTP/1.1" 200 10693
+INFO 2025-06-12 19:59:02,698 basehttp 11896 24620 "GET /admin/ HTTP/1.1" 200 10693
+INFO 2025-06-12 19:59:05,131 basehttp 11896 24620 "GET / HTTP/1.1" 302 0
+INFO 2025-06-12 19:59:05,163 basehttp 11896 24620 "GET /accounts/dashboard/ HTTP/1.1" 200 9814
+INFO 2025-06-12 19:59:05,231 basehttp 11896 24620 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:59:28,805 basehttp 11896 24620 "GET /accounts/dashboard/ HTTP/1.1" 200 9684
+INFO 2025-06-12 19:59:30,624 basehttp 11896 24620 "GET /exams/ HTTP/1.1" 200 22091
+INFO 2025-06-12 19:59:30,680 basehttp 11896 24620 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 19:59:40,962 basehttp 11896 24620 "GET /exams/session/1/result/ HTTP/1.1" 200 13151
+INFO 2025-06-12 19:59:52,232 basehttp 11896 24620 "GET /exams/sessions/ HTTP/1.1" 200 17279

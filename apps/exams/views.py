@@ -407,7 +407,6 @@ class ExamSessionListView(LoginRequiredMixin, ListView):
 
         if exam_id:
             queryset = queryset.filter(exam_id=exam_id)
-
         if status:
             queryset = queryset.filter(status=status)
 
@@ -421,7 +420,21 @@ class ExamSessionListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter_form'] = ExamSessionFilterForm(self.request.GET)
+
+        # Get statistics
+        all_sessions = ExamSession.objects.all()
+        context['total_sessions'] = all_sessions.count()
+        context['completed_sessions'] = all_sessions.filter(
+            status='completed').count()
+        context['in_progress_sessions'] = all_sessions.filter(
+            status='in_progress').count()
+        context['expired_sessions'] = all_sessions.filter(
+            status='expired').count()
+
+        # Get available exams for filter
+        context['available_exams'] = Exam.objects.filter(
+            is_active=True).order_by('title')
+
         return context
 
 
