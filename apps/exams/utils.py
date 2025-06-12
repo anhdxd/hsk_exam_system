@@ -347,7 +347,7 @@ def generate_exam_report(exam):
             questions_data = session.get_questions_with_answers()
             
             for q_data in questions_data:
-                qtype = q_data['question']['question_type']['name']
+                qtype = q_data['question'].question_type.name
                 
                 if qtype not in report['performance_analysis']:
                     report['performance_analysis'][qtype] = {

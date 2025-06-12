@@ -1,6 +1,7 @@
 /* Common Exam Styles */
 
-.exam-header {
+/* Sticky exam header for exam taking page */
+.exam-header.exam-timer-header {
     background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
     color: white;
     padding: 1rem 0;
@@ -8,6 +9,16 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+/* Static exam header for detail pages */
+.exam-header {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: var(--box-shadow);
+    position: static;
+    z-index: 1;
 }
 
 .exam-card {

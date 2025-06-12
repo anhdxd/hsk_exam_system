@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.http import JsonResponse
 
 def home_view(request):
     """Home page view"""
@@ -26,12 +28,18 @@ def home_view(request):
         return redirect('accounts:dashboard')
     return redirect('accounts:login')
 
+def chrome_devtools_handler(request):
+    """Handle Chrome DevTools requests"""
+    return JsonResponse({}, status=404)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('accounts/', include('apps.accounts.urls')),
     path('exams/', include('apps.exams.urls')),
     path('questions/', include('apps.questions.urls')),
+    # Handle Chrome DevTools requests
+    path('.well-known/appspecific/com.chrome.devtools.json', chrome_devtools_handler),
     # path('submissions/', include('apps.submissions.urls')),
     # path('analytics/', include('apps.analytics.urls')),
 ]

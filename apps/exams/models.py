@@ -96,8 +96,7 @@ class Exam(TimeStampedModel):
         default=False,
         verbose_name="Yêu cầu hoàn thành tất cả câu",
         help_text="Bắt buộc trả lời tất cả câu hỏi"
-    )
-
+    )    
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Kỳ thi'
@@ -125,11 +124,11 @@ class Exam(TimeStampedModel):
         return True
 
     def get_duration_display(self):
-        """Get formatted duration"""
+        """Get human-readable duration"""
         hours = self.duration_minutes // 60
         minutes = self.duration_minutes % 60
         if hours > 0:
-            return f"{hours}h {minutes}m" if minutes > 0 else f"{hours}h"
+            return f"{hours}h {minutes}m"
         return f"{minutes}m"
 
     def get_available_questions(self):
@@ -142,13 +141,14 @@ class Exam(TimeStampedModel):
     def generate_question_order(self):
         """Generate random question order for exam"""
         questions = list(
-            self.get_available_questions().values_list('id', flat=True))
+            self.get_available_questions().values_list('id', flat=True)
+        )
 
         if self.randomize_questions:
             random.shuffle(questions)
 
         # Limit to total_questions
-        return questions[:self.total_questions] 
+        return questions[:self.total_questions]
     
     def can_user_take_exam(self, user):
         """Check if user can take this exam"""
@@ -282,13 +282,12 @@ class ExamSession(TimeStampedModel):
         ]
 
     def __str__(self):
-        return f"{self.user.username} - {self.exam.title} ({self.get_status_display()})"
-
+        return f"{self.user.username} - {self.exam.title} ({self.get_status_display()})"    
     def get_absolute_url(self):
         if self.status == 'not_started':
-            return reverse('exams:take', kwargs={'pk': self.exam.pk})
+            return reverse('exams:start', kwargs={'pk': self.exam.pk})
         elif self.status == 'in_progress':
-            return reverse('exams:continue', kwargs={'pk': self.pk})
+            return reverse('exams:take_exam', kwargs={'pk': self.pk})
         else:
             return reverse('exams:result', kwargs={'pk': self.pk})
 
@@ -447,3 +446,62 @@ class ExamSession(TimeStampedModel):
                 continue
 
         return questions_data
+
+
+class ExamAnswer(TimeStampedModel):
+    """User's answer to a specific question in an exam session"""
+    exam_session = models.ForeignKey(
+        'ExamSession', 
+        on_delete=models.CASCADE, 
+        related_name='exam_answers',
+        verbose_name="Phiên thi"
+    )
+    question = models.ForeignKey(
+        'questions.Question', 
+        on_delete=models.CASCADE,
+        verbose_name="Câu hỏi"
+    )
+    selected_choice = models.ForeignKey(
+        'questions.Choice', 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True,
+        verbose_name="Lựa chọn"
+    )
+    text_answer = models.TextField(
+        blank=True, 
+        help_text="For text-based questions",
+        verbose_name="Câu trả lời dạng text"
+    )
+    is_correct = models.BooleanField(
+        default=False,
+        verbose_name="Đúng"
+    )
+    points_earned = models.FloatField(
+        default=0.0,
+        verbose_name="Điểm đạt được"
+    )
+    time_spent_seconds = models.IntegerField(
+        default=0, 
+        help_text="Time spent on this question",
+        verbose_name="Thời gian làm bài (giây)"
+    )
+
+    class Meta:
+        unique_together = ['exam_session', 'question']
+        ordering = ['question__id']
+        verbose_name = 'Câu trả lời'
+        verbose_name_plural = 'Câu trả lời'
+
+    def __str__(self):
+        return f"{self.exam_session.user.username} - Q{self.question.id}: {'✓' if self.is_correct else '✗'}"
+
+    def save(self, *args, **kwargs):
+        """Auto-calculate if answer is correct"""
+        if self.selected_choice and self.selected_choice.is_correct:
+            self.is_correct = True
+            self.points_earned = self.question.points
+        else:
+            self.is_correct = False
+            self.points_earned = 0.0
+        super().save(*args, **kwargs)

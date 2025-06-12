@@ -5,9 +5,23 @@ body {
     background-color: #f8f9fa;
 }
 
+/* Navbar styling and z-index management */
+.navbar {
+    z-index: 1050 !important; /* Higher than any exam headers */
+}
+
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.navbar .dropdown-menu {
+    z-index: 1060 !important; /* Even higher for dropdowns */
+}
+
+/* Ensure collapsed navbar content appears above everything */
+.navbar-collapse {
+    z-index: 1055 !important;
 }
 
 .jumbotron {
@@ -149,4 +163,18 @@ body {
 .avatar-lg {
     width: 80px;
     height: 80px;
+}
+
+/* Z-index management */
+.navbar {
+    z-index: 1030;
+}
+
+.navbar .dropdown-menu {
+    z-index: 1050;
+}
+
+/* Ensure all Bootstrap dropdowns work with custom headers */
+.dropdown-menu {
+    z-index: 1050 !important;
 }

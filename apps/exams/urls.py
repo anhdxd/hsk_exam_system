@@ -24,4 +24,8 @@ urlpatterns = [
     
     # Admin URLs
     path('sessions/', views.ExamSessionListView.as_view(), name='session_list'),
+    
+    # Submission URLs (migrated from submissions app)
+    path('history/', views.submission_history_view, name='submission_history'),
+    path('submission/<int:session_id>/', views.submission_detail_view, name='submission_detail'),
 ]

@@ -1137,3 +1137,535 @@ WARNING 2025-06-12 10:47:47,282 log 8220 9132 Not Found: /exams/999/
 WARNING 2025-06-12 10:47:54,239 log 8220 9132 Not Found: /exams/session/1/result/
 WARNING 2025-06-12 10:48:27,061 log 21032 23256 Not Found: /exams/999/
 WARNING 2025-06-12 10:48:34,302 log 21032 23256 Not Found: /exams/session/1/result/
+WARNING 2025-06-12 11:19:05,762 log 22876 16684 Not Found: /exams/submission/1/
+ERROR 2025-06-12 11:19:06,638 log 22876 16684 Internal Server Error: /exams/submission/1/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\apps\exams\views.py", line 742, in submission_detail_view
+    return render(request, 'exams/submission_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 1482, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1116, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'div'
+ERROR 2025-06-12 11:19:09,265 log 22876 16684 Internal Server Error: /exams/submission/1/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\apps\exams\views.py", line 742, in submission_detail_view
+    return render(request, 'exams/submission_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 1482, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1116, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'div'
+WARNING 2025-06-12 11:25:20,552 log 14260 2380 Not Found: /exams/submission/1/
+ERROR 2025-06-12 11:25:21,427 log 14260 2380 Internal Server Error: /exams/submission/1/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\apps\exams\views.py", line 742, in submission_detail_view
+    return render(request, 'exams/submission_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 1482, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1116, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'div'
+ERROR 2025-06-12 11:25:24,072 log 14260 2380 Internal Server Error: /exams/submission/1/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\apps\exams\views.py", line 742, in submission_detail_view
+    return render(request, 'exams/submission_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\defaulttags.py", line 1482, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 1116, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'div'
+INFO 2025-06-12 11:58:20,321 autoreload 20744 23244 Watching for file changes with StatReloader
+INFO 2025-06-12 11:58:32,058 basehttp 20744 21060 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-12 11:58:32,118 basehttp 20744 21060 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-06-12 11:58:32,131 basehttp 20744 21060 "GET /static/css/variables.css HTTP/1.1" 304 0
+INFO 2025-06-12 11:58:32,135 basehttp 20744 13088 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 11:58:32,135 basehttp 20744 6300 "GET /static/css/exams/exam_list.css HTTP/1.1" 304 0
+INFO 2025-06-12 11:58:32,135 basehttp 20744 20172 "GET /static/js/main.js HTTP/1.1" 304 0
+WARNING 2025-06-12 11:58:32,645 log 20744 20172 Not Found: /favicon.ico
+WARNING 2025-06-12 11:58:32,645 basehttp 20744 20172 "GET /favicon.ico HTTP/1.1" 404 2801
+INFO 2025-06-12 11:58:35,256 basehttp 20744 20172 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-12 11:58:40,265 basehttp 20744 20172 "GET /exams/session/3/result/ HTTP/1.1" 200 19174
+INFO 2025-06-12 11:58:40,310 basehttp 20744 20172 "GET /static/css/exams/exam_result.css HTTP/1.1" 304 0
+INFO 2025-06-12 11:59:49,659 basehttp 20744 20172 "GET /exams/session/3/result/ HTTP/1.1" 200 19174
+INFO 2025-06-12 12:00:02,034 basehttp 20744 20172 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-12 12:00:11,151 basehttp 20744 20172 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 12:00:11,190 basehttp 20744 20172 "GET /static/css/exams/exam_detail.css HTTP/1.1" 304 0
+INFO 2025-06-12 12:00:34,698 basehttp 20744 20172 "GET /questions/ HTTP/1.1" 200 42974
+INFO 2025-06-12 12:00:42,843 basehttp 20744 20172 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-12 12:00:45,258 basehttp 20744 20172 "GET / HTTP/1.1" 302 0
+INFO 2025-06-12 12:00:45,272 basehttp 20744 20172 "GET /accounts/dashboard/ HTTP/1.1" 200 9688
+INFO 2025-06-12 12:00:48,690 basehttp 20744 20172 "GET /questions/ HTTP/1.1" 200 42974
+INFO 2025-06-12 12:00:53,939 basehttp 20744 20172 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-12 12:00:58,329 basehttp 20744 20172 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 12:01:08,865 basehttp 20744 20172 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+INFO 2025-06-12 12:01:18,978 basehttp 20744 20172 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 12:01:27,531 autoreload 8444 5912 Watching for file changes with StatReloader
+INFO 2025-06-12 12:01:47,784 basehttp 8444 18760 "GET /exams/ HTTP/1.1" 200 15198
+INFO 2025-06-12 12:01:58,326 basehttp 8444 18760 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+INFO 2025-06-12 12:02:15,110 autoreload 15156 6516 Watching for file changes with StatReloader
+INFO 2025-06-12 12:02:23,289 basehttp 15156 20724 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:33:44,792 autoreload 25104 26232 Watching for file changes with StatReloader
+INFO 2025-06-12 13:33:52,793 basehttp 25104 2380 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:34:08,134 log 25104 2380 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:34:08,135 basehttp 25104 2380 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2912
+INFO 2025-06-12 13:35:41,653 basehttp 25104 2380 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:35:41,703 log 25104 2380 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:35:41,703 basehttp 25104 2380 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2912
+INFO 2025-06-12 13:35:53,675 basehttp 25104 2380 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:37:21,065 basehttp 25104 2380 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:37:56,854 log 25104 2380 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:37:56,855 basehttp 25104 2380 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2912
+INFO 2025-06-12 13:38:41,380 autoreload 25104 26232 D:\anhdxd\hsk_exam_system\config\urls.py changed, reloading.
+INFO 2025-06-12 13:38:41,868 autoreload 10468 26456 Watching for file changes with StatReloader
+INFO 2025-06-12 13:38:50,795 autoreload 10468 26456 D:\anhdxd\hsk_exam_system\config\urls.py changed, reloading.
+INFO 2025-06-12 13:38:51,289 autoreload 1860 4496 Watching for file changes with StatReloader
+WARNING 2025-06-12 13:39:46,105 log 1860 26284 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:39:46,105 basehttp 1860 26284 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+INFO 2025-06-12 13:42:41,270 autoreload 1860 4496 D:\anhdxd\hsk_exam_system\config\urls.py changed, reloading.
+INFO 2025-06-12 13:42:41,781 autoreload 24804 19812 Watching for file changes with StatReloader
+INFO 2025-06-12 13:42:43,221 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:42:43,266 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:42:43,268 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+WARNING 2025-06-12 13:43:09,296 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:43:09,296 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+WARNING 2025-06-12 13:44:05,124 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:44:05,124 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+INFO 2025-06-12 13:44:07,115 basehttp 24804 13224 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+WARNING 2025-06-12 13:44:07,261 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:44:07,261 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+WARNING 2025-06-12 13:44:18,310 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:44:18,310 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+INFO 2025-06-12 13:44:56,258 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:45:10,470 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:45:59,876 basehttp 24804 13224 "GET /exams/2/edit/ HTTP/1.1" 200 18860
+INFO 2025-06-12 13:45:59,957 basehttp 24804 13224 "GET /static/css/exams/exam_form.css HTTP/1.1" 200 4860
+INFO 2025-06-12 13:46:06,592 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:47:14,207 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:47:14,208 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+INFO 2025-06-12 13:47:46,738 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+WARNING 2025-06-12 13:47:46,773 log 24804 13224 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-12 13:47:46,773 basehttp 24804 13224 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 2
+INFO 2025-06-12 13:48:01,778 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:03,274 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:07,973 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:08,792 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:09,999 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:11,097 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:12,017 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:12,603 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:48:13,755 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:35,563 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:37,335 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:38,160 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:38,654 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:38,807 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:38,944 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:49:45,853 basehttp 24804 13224 "GET /exams/2/edit/ HTTP/1.1" 200 18860
+INFO 2025-06-12 13:49:45,892 basehttp 24804 13224 "GET /static/css/exams/exam_form.css HTTP/1.1" 304 0
+INFO 2025-06-12 13:49:49,083 basehttp 24804 13224 "GET /exams/session/1/result/ HTTP/1.1" 200 19305
+INFO 2025-06-12 13:50:47,206 basehttp 24804 13224 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:23,934 autoreload 17680 8500 Watching for file changes with StatReloader
+INFO 2025-06-12 13:52:25,930 basehttp 17680 13908 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:54,431 autoreload 12528 15688 Watching for file changes with StatReloader
+INFO 2025-06-12 13:52:54,746 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:56,162 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:56,959 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:57,216 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:57,435 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:57,607 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:57,838 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 13:52:57,956 basehttp 12528 21364 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:27,995 basehttp 12528 24532 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:28,041 basehttp 12528 24532 "GET /static/css/variables.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:06:28,096 basehttp 12528 8852 "GET /static/css/exams/exam_detail.css HTTP/1.1" 200 3302
+INFO 2025-06-12 14:06:28,096 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 200 5430
+INFO 2025-06-12 14:06:44,493 basehttp 12528 24992 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:44,549 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 200 5430
+INFO 2025-06-12 14:06:52,047 basehttp 12528 24992 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:52,077 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 200 5424
+INFO 2025-06-12 14:06:54,271 basehttp 12528 24992 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:54,301 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:06:54,953 basehttp 12528 24992 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:54,982 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:06:56,204 basehttp 12528 24992 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:06:56,234 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:06:57,667 basehttp 12528 24992 "GET /exams/2/edit/ HTTP/1.1" 200 18860
+INFO 2025-06-12 14:06:57,696 basehttp 12528 24992 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:06:57,696 basehttp 12528 8852 "GET /static/css/exams/exam_form.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:07:09,341 autoreload 22548 9920 Watching for file changes with StatReloader
+INFO 2025-06-12 14:07:11,190 basehttp 22548 14428 "GET /exams/2/ HTTP/1.1" 200 15752
+INFO 2025-06-12 14:07:11,222 basehttp 22548 14428 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:07:20,231 basehttp 22548 14428 "GET /exams/session/2/result/ HTTP/1.1" 200 19303
+INFO 2025-06-12 14:07:20,278 basehttp 22548 14428 "GET /static/css/exams/exam_common.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:07:20,278 basehttp 22548 13324 "GET /static/css/exams/exam_result.css HTTP/1.1" 304 0
+INFO 2025-06-12 14:07:22,357 basehttp 22548 13324 "GET /exams/2/ HTTP/1.1" 200 15752
+ERROR 2025-06-12 14:07:26,065 log 22548 13324 Internal Server Error: /exams/sessions/
+Traceback (most recent call last):
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anhdxd\hsk_exam_system\hskexamsystem-env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: exams/session_list.html, exams/examsession_list.html
+ERROR 2025-06-12 14:07:26,066 basehttp 22548 13324 "GET /exams/sessions/?exam=2 HTTP/1.1" 500 91170

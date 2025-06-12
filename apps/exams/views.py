@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 import json
 
-from .models import Exam, ExamSession
+from .models import Exam, ExamSession, ExamAnswer
 from .forms import ExamForm, StartExamForm, ExamAnswerForm, ExamSearchForm, ExamSessionFilterForm
 from apps.common.models import HSKLevel
 from apps.questions.models import Question
@@ -161,7 +161,7 @@ class ExamDeleteView(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         exam = self.get_object()
-        
+
         # Get session statistics
         all_sessions = exam.examsession_set.all()
         context.update({
@@ -170,7 +170,7 @@ class ExamDeleteView(LoginRequiredMixin, DeleteView):
             'in_progress_sessions': all_sessions.filter(status='in_progress').count(),
             'has_in_progress': all_sessions.filter(status='in_progress').exists(),
         })
-        
+
         return context
 
     def delete(self, request, *args, **kwargs):
@@ -329,14 +329,14 @@ def exam_result_view(request, pk):
     total_questions = len(session.questions_order)
     correct_answers = 0
     incorrect_answers = 0
-    
+
     # Count correct and incorrect answers
     for question_data in questions_with_answers:
         if question_data['is_correct']:
             correct_answers += 1
         else:
             incorrect_answers += 1
-    
+
     # Calculate time taken
     time_taken_display = "N/A"
     time_taken_minutes = 0
@@ -348,9 +348,10 @@ def exam_result_view(request, pk):
         if hours > 0:
             time_taken_display = f"{hours}h {minutes}m"
         else:
-            time_taken_display = f"{minutes}m"    # Check if user can retake exam
+            # Check if user can retake exam
+            time_taken_display = f"{minutes}m"
     can_retake, retake_message = session.exam.can_user_take_exam(request.user)
-    
+
     return render(request, 'exams/exam_result.html', {
         'session': session,
         'exam': session.exam,
@@ -461,23 +462,15 @@ def save_answer_ajax(request, pk):
         return JsonResponse({'status': 'error', 'message': 'Phiên thi không hợp lệ'})
 
     try:
-        # Support both JSON and form data
-        if request.content_type == 'application/json':
-            data = json.loads(request.body)
-        else:
-            data = request.POST
-
-        question_id = data.get('question_id')
-        choice_id = data.get('choice_id')
+        question_id = request.POST.get('question_id')
+        choice_id = request.POST.get('choice_id')
 
         if question_id and choice_id:
             session.save_answer(question_id, choice_id)
             return JsonResponse({'status': 'success', 'message': 'Đã lưu câu trả lời'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Dữ liệu không hợp lệ'})
+            return JsonResponse({'status': 'error', 'message': 'Thiếu thông tin câu hỏi hoặc lựa chọn'})
 
-    except json.JSONDecodeError:
-        return JsonResponse({'status': 'error', 'message': 'Dữ liệu JSON không hợp lệ'})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
 
@@ -500,7 +493,9 @@ def get_question_ajax(request, pk):
             'status': 'expired',
             'message': 'Hết thời gian thi',
             'redirect_url': reverse('exams:result', kwargs={'pk': session.pk})
-        })    # Get current question
+        })
+
+    # Get current question
     current_question = session.get_current_question()
     if not current_question:
         # No more questions, complete the exam
@@ -648,3 +643,96 @@ def complete_exam_ajax(request, pk):
 
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
+
+
+# Submission Views (migrated from submissions app)
+@login_required
+def submission_history_view(request):
+    """List all exam submissions for the current user"""
+    submissions = ExamSession.objects.filter(
+        user=request.user,
+        status__in=['completed', 'expired']
+    ).select_related('exam', 'exam__hsk_level').order_by('-completed_at')
+
+    # Add search functionality
+    search_query = request.GET.get('search', '')
+    if search_query:
+        submissions = submissions.filter(
+            Q(exam__title__icontains=search_query) |
+            Q(exam__hsk_level__name__icontains=search_query)
+        )
+
+    # Filter by result
+    result_filter = request.GET.get('result', '')
+    if result_filter == 'passed':
+        submissions = submissions.filter(passed=True)
+    elif result_filter == 'failed':
+        submissions = submissions.filter(passed=False)
+
+    # Pagination
+    paginator = Paginator(submissions, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+        'search_query': search_query,
+        'result_filter': result_filter,
+    }
+    return render(request, 'exams/submission_history.html', context)
+
+
+@login_required
+def submission_detail_view(request, session_id):
+    """View detailed results of a specific exam submission"""
+    submission = get_object_or_404(
+        ExamSession,
+        id=session_id,
+        user=request.user,
+        status__in=['completed', 'expired']
+    )
+    # Get all answers for this submission
+    answers = ExamAnswer.objects.filter(
+        exam_session=submission
+    ).select_related('question', 'question__question_type', 'selected_choice').order_by('question__id')
+
+    # Calculate detailed statistics
+    total_questions = answers.count()
+    correct_answers = answers.filter(is_correct=True).count()
+    wrong_answers = total_questions - correct_answers
+    accuracy_percentage = (
+        correct_answers / total_questions * 100) if total_questions > 0 else 0
+
+    # Group answers by question type
+    answer_stats = {}
+    for answer in answers:
+        question_type = answer.question.question_type.name if answer.question.question_type else 'General'
+        if question_type not in answer_stats:
+            answer_stats[question_type] = {'correct': 0, 'total': 0}
+        answer_stats[question_type]['total'] += 1
+        if answer.is_correct:
+            answer_stats[question_type]['correct'] += 1
+
+    # Calculate time statistics
+    time_taken_display = "N/A"
+    if submission.started_at and submission.completed_at:
+        time_diff = submission.completed_at - submission.started_at
+        time_taken_minutes = int(time_diff.total_seconds() / 60)
+        hours = time_taken_minutes // 60
+        minutes = time_taken_minutes % 60
+        if hours > 0:
+            time_taken_display = f"{hours}h {minutes}m"
+        else:
+            time_taken_display = f"{minutes}m"
+
+    context = {
+        'submission': submission,
+        'answers': answers,
+        'total_questions': total_questions,
+        'correct_answers': correct_answers,
+        'wrong_answers': wrong_answers,
+        'accuracy_percentage': round(accuracy_percentage, 1),
+        'answer_stats': answer_stats,
+        'time_taken_display': time_taken_display,
+    }
+    return render(request, 'exams/submission_detail.html', context)

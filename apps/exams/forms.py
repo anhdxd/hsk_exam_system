@@ -11,7 +11,7 @@ from apps.questions.models import QuestionBank
 class ExamForm(forms.ModelForm):
     """Form for creating and editing exams"""
     class Meta:
-        model = Exam        
+        model = Exam
         fields = [
             'title', 'description', 'hsk_level', 'question_bank',
             'duration_minutes', 'total_questions', 'passing_score',
@@ -60,6 +60,16 @@ class ExamForm(forms.ModelForm):
                 'class': 'form-control',
                 'type': 'datetime-local'
             }),
+            'max_attempts': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 1,
+                'max': 10
+            }),
+            'instructions': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 6,
+                'placeholder': 'Hướng dẫn chi tiết cho thí sinh...'
+            }),
             'is_active': forms.CheckboxInput(attrs={
                 'class': 'form-check-input'
             }),
@@ -71,14 +81,6 @@ class ExamForm(forms.ModelForm):
             }),
             'allow_retake': forms.CheckboxInput(attrs={
                 'class': 'form-check-input'
-            }),            'max_attempts': forms.NumberInput(attrs={
-                'class': 'form-control',
-                'min': 1,
-                'max': 10
-            }),            'instructions': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5,
-                'placeholder': 'Nhập hướng dẫn thi chi tiết...'
             }),
             'allow_navigation': forms.CheckboxInput(attrs={
                 'class': 'form-check-input'
@@ -90,12 +92,13 @@ class ExamForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # Filter question banks by HSK level if instance exists
-        if self.instance and self.instance.pk:
+        if self.instance and self.instance.pk and self.instance.hsk_level:
             self.fields['question_bank'].queryset = QuestionBank.objects.filter(
                 hsk_level=self.instance.hsk_level,
                 is_active=True
-            )
+            ).select_related('hsk_level')
         else:
             self.fields['question_bank'].queryset = QuestionBank.objects.filter(
                 is_active=True
@@ -111,12 +114,12 @@ class ExamForm(forms.ModelForm):
 
         # Validate date range
         if start_date and end_date:
-            if end_date <= start_date:
+            if start_date >= end_date:
                 raise ValidationError({
                     'end_date': 'Ngày kết thúc phải sau ngày bắt đầu.'
                 })
 
-        # Validate question bank matches HSK level
+        # Validate question bank HSK level
         if hsk_level and question_bank:
             if question_bank.hsk_level != hsk_level:
                 raise ValidationError({
@@ -132,7 +135,7 @@ class ExamForm(forms.ModelForm):
 
             if total_questions > available_count:
                 raise ValidationError({
-                    'total_questions': f'Chỉ có {available_count} câu hỏi khả dụng trong ngân hàng.'
+                    'total_questions': f'Không đủ câu hỏi. Chỉ có {available_count} câu khả dụng.'
                 })
 
         return cleaned_data
@@ -183,9 +186,9 @@ class ExamAnswerForm(forms.Form):
 
     def __init__(self, question, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.question = question
         self.fields['choice'].queryset = question.choices.all().order_by(
             'order')
+        self.fields['choice'].label = question.question_text
 
 
 class ExamSearchForm(forms.Form):
@@ -271,4 +274,29 @@ class ExamSessionFilterForm(forms.Form):
             'type': 'date'
         }),
         label='Đến ngày'
+    )
+
+
+class SubmissionHistoryFilterForm(forms.Form):
+    """Form for filtering submission history"""
+    search = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Tìm kiếm kỳ thi...'
+        }),
+        label='Tìm kiếm'
+    )
+
+    result = forms.ChoiceField(
+        choices=[
+            ('', 'Tất cả kết quả'),
+            ('passed', 'Đậu'),
+            ('failed', 'Rớt'),
+        ],
+        required=False,
+        widget=forms.Select(attrs={
+            'class': 'form-select'
+        }),
+        label='Kết quả'
     )

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import Exam, ExamSession
+from .models import Exam, ExamSession, ExamAnswer
 
 
 @admin.register(Exam)
@@ -93,3 +93,34 @@ class ExamSessionAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('user', 'exam', 'exam__hsk_level')
+
+
+@admin.register(ExamAnswer)
+class ExamAnswerAdmin(admin.ModelAdmin):
+    """Admin configuration for ExamAnswer model"""
+    list_display = ('exam_session', 'question', 'selected_choice', 
+                    'is_correct', 'points_earned', 'time_spent_seconds')
+    list_filter = ('is_correct', 'exam_session__exam__hsk_level',
+                   'question__question_type', 'created_at')
+    search_fields = ('exam_session__user__username', 'exam_session__exam__title', 
+                     'question__question_text')
+    readonly_fields = ('created_at', 'updated_at', 'is_correct', 'points_earned')
+
+    fieldsets = (
+        ('Answer Information', {
+            'fields': ('exam_session', 'question', 'selected_choice', 'text_answer')
+        }),
+        ('Results', {
+            'fields': ('is_correct', 'points_earned', 'time_spent_seconds')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related(
+            'exam_session', 'exam_session__user', 'exam_session__exam',
+            'question', 'selected_choice'
+        )
